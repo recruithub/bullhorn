@@ -1,0 +1,11 @@
+class Placement:
+    id: int
+    candidate: dict
+    comments: str
+    dateAdded: int
+    dateBegin: int
+    dateEnd: int
+    dateLastModified: int
+    referralFee: float
+    salary: float
+    status: str
