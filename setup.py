@@ -14,6 +14,9 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/recruithub/bullhorn",
     packages=find_packages(),
+    install_requires=[
+        "aiohttp==3.8.4",
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
