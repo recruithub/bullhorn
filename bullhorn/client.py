@@ -1,7 +1,7 @@
-import asyncio
 import json
 import logging
 import sys
+import time
 from typing import Any, Callable, Coroutine, Dict, List, Optional, TypeVar, Union
 
 import aiohttp
@@ -53,7 +53,7 @@ class BullhornClient:
         user_agent = " ".join(user_agent_strings)
         return user_agent
 
-    async def request(
+    def request(
         self,
         route: Route,
         files=None,
@@ -91,18 +91,18 @@ class BullhornClient:
                 kwargs["data"] = form_data
             # Execute request
             try:
-                async with self.__session.request(method, url, **kwargs) as response:
+                with self.__session.request(method, url, **kwargs) as response:
                     logger.debug(
                         f"{method} {url} with {kwargs.get('data')} has returned {response.status}"
                     )
-                    data = await response.json(encoding="utf-8")
+                    data = response.json(encoding="utf-8")
                     # Successful request
                     if 300 > response.status >= 200:
                         logger.debug(f"{method} {url} has received {data}")
                         return data
                     # Server error, so retry request with exponential back-off
                     if response.status in {500, 502, 503, 504, 524}:
-                        await asyncio.sleep(1 + tries * 2)
+                        time.sleep(1 + tries * 2)
                         continue
                     # Client error, so raise exception
                     if response.status == 403:
@@ -116,7 +116,7 @@ class BullhornClient:
             except OSError as e:
                 # Connection reset by peer, so retry with exponential back-off
                 if tries < 4 and e.errno in (54, 10054):
-                    await asyncio.sleep(1 + tries * 2)
+                    time.sleep(1 + tries * 2)
                     continue
                 raise
         if response is not None:
@@ -127,22 +127,22 @@ class BullhornClient:
         # Capture unhandled logic
         raise RuntimeError(response, "Unreachable code in HTTP handling")
 
-    async def login(
+    def login(
         self,
     ) -> None:
         # Initialise session
         self.__session: aiohttp.ClientSession = aiohttp.ClientSession()
         # Check for valid user sessionz
         try:
-            ping = await self.ping()
+            ping = self.ping()
         except HTTPException:
             raise
 
-    async def ping(
+    def ping(
         self,
     ) -> Response[ping.Ping]:
         """Ping used to test whether the client’s session is valid."""
-        request = await self.request(
+        request = self.request(
             Route(
                 "GET",
                 self.rest_url + "ping",
@@ -150,12 +150,12 @@ class BullhornClient:
         )
         return request
 
-    async def get_candidates(
+    def get_candidates(
         self,
         query: str,
         fields: str,
     ) -> Response[List[candidate.Candidate]]:
-        request = await self.request(
+        request = self.request(
             Route(
                 "GET",
                 self.rest_url + "search/Candidate?query={query}&fields={fields}",
@@ -167,12 +167,12 @@ class BullhornClient:
         )
         return request
 
-    async def get_placements(
+    def get_placements(
         self,
         query: str,
         fields: str,
     ) -> Response[List[placement.Placement]]:
-        request = await self.request(
+        request = self.request(
             Route(
                 "GET",
                 self.rest_url + "search/Placement?query={query}&fields={fields}",
