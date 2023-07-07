@@ -166,3 +166,20 @@ class BullhornClient:
             )
         )
         return request
+
+    async def get_placements(
+        self,
+        query: str,
+        fields: str,
+    ) -> Response[List[placement.Placement]]:
+        request = await self.request(
+            Route(
+                "GET",
+                self.rest_url + "search/Placement?query={query}&fields={fields}",
+                path_params={
+                    "query": query,
+                    "fields": fields,
+                },
+            )
+        )
+        return request
