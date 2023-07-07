@@ -7,5 +7,4 @@ black==23.3.0
 # Unit testing
 coverage==7.2.7
 pytest==7.3.1
-pytest-asyncio==0.21.0
 pytest-mock==3.10.0
