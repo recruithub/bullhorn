@@ -1,0 +1,2 @@
+class Ping:
+    sessionExpires: int
