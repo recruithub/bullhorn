@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="bullhorn",
-    version="0.0.1",
+    version="0.0.2",
     author="lloydtao (Lewis Lloyd)",
     author_email="lewis@recruit-hub.com",
     description="Python wrapper for the Bullhorn REST API",
