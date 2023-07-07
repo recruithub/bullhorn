@@ -149,3 +149,20 @@ class BullhornClient:
             )
         )
         return request
+
+    async def get_candidates(
+        self,
+        query: str,
+        fields: str,
+    ) -> Response[List[candidate.Candidate]]:
+        request = await self.request(
+            Route(
+                "GET",
+                self.rest_url + "search/Candidate?query={query}&fields={fields}",
+                path_params={
+                    "query": query,
+                    "fields": fields,
+                },
+            )
+        )
+        return request
