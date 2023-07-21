@@ -2,7 +2,7 @@ import json
 import logging
 import sys
 import time
-from typing import Any, Callable, Coroutine, Dict, List, Optional, TypeVar, Union
+from typing import Any, Dict, List, Optional, Union
 
 import requests
 
@@ -10,10 +10,6 @@ from . import __version__
 from .exceptions import BullhornServerError, Forbidden, HTTPException, NotFound
 from .route import Route
 from .types import candidate, ping, placement
-
-T = TypeVar("T")
-Response = Coroutine[Any, Any, T]
-ResponseT = TypeVar("ResponseT", bound=Callable[..., Response[Any]])
 
 logger = logging.getLogger(__name__)
 
@@ -125,7 +121,7 @@ class BullhornClient:
 
     def ping(
         self,
-    ) -> Response[ping.Ping]:
+    ) -> ping.Ping:
         """Ping used to test whether the client’s session is valid."""
         request = self.request(
             Route(
@@ -139,7 +135,7 @@ class BullhornClient:
         self,
         query: str,
         fields: str,
-    ) -> Response[List[candidate.Candidate]]:
+    ) -> List[candidate.Candidate]:
         request = self.request(
             Route(
                 "GET",
@@ -156,7 +152,7 @@ class BullhornClient:
         self,
         query: str,
         fields: str,
-    ) -> Response[List[placement.Placement]]:
+    ) -> List[placement.Placement]:
         request = self.request(
             Route(
                 "GET",
