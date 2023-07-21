@@ -13,6 +13,7 @@ from bullhorn.types import (
     candidate,
     client_contact,
     client_corporation,
+    corporate_user,
     ping,
     placement,
     placement_commission,
@@ -171,6 +172,23 @@ class BullhornClient:
                 "GET",
                 self.rest_url
                 + "search/ClientCorporation?query={query}&fields={fields}",
+                path_params={
+                    "query": query,
+                    "fields": fields,
+                },
+            )
+        )
+        return request
+
+    def get_corporate_users(
+        self,
+        query: str,
+        fields: str,
+    ) -> List[corporate_user.CorporateUser]:
+        request = self.request(
+            Route(
+                "GET",
+                self.rest_url + "search/CorporateUser?query={query}&fields={fields}",
                 path_params={
                     "query": query,
                     "fields": fields,
