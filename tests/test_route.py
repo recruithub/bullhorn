@@ -15,7 +15,7 @@ def test_route_url():
     assert route.url == "https://rest123.bullhornstaffing.com/rest-services/1234/ping"
 
 
-def test_route_with_params_url():
+def test_route_url_params():
     method = "GET"
     path = (
         "https://rest123.bullhornstaffing.com/rest-services/1234/"
