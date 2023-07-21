@@ -5,12 +5,12 @@ from bullhorn.client import BullhornClient
 
 def get_placements_and_candidates():
     # Set credentials
-    token = os.environ.get("BULLHORN_SESSION_TOKEN")
+    session_token = os.environ.get("BULLHORN_SESSION_TOKEN")
     rest_url = os.environ.get("BULLHORN_REST_URL")
 
     # Initialise client
     bc = BullhornClient(
-        token=token,
+        token=session_token,
         rest_url=rest_url,
     )
 
