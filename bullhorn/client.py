@@ -6,10 +6,10 @@ from typing import Any, Dict, List, Optional, Union
 
 import requests
 
-from . import __version__
-from .exceptions import BullhornServerError, Forbidden, HTTPException, NotFound
-from .route import Route
 from .types import candidate, ping, placement
+from bullhorn import __version__
+from bullhorn.exceptions import BullhornServerError, Forbidden, HTTPException, NotFound
+from bullhorn.route import Route
 
 logger = logging.getLogger(__name__)
 
