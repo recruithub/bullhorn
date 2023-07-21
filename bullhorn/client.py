@@ -14,6 +14,7 @@ from bullhorn.types import (
     client_contact,
     client_corporation,
     corporate_user,
+    job_order,
     ping,
     placement,
     placement_commission,
@@ -189,6 +190,23 @@ class BullhornClient:
             Route(
                 "GET",
                 self.rest_url + "search/CorporateUser?query={query}&fields={fields}",
+                path_params={
+                    "query": query,
+                    "fields": fields,
+                },
+            )
+        )
+        return request
+
+    def get_job_orders(
+        self,
+        query: str,
+        fields: str,
+    ) -> List[job_order.JobOrder]:
+        request = self.request(
+            Route(
+                "GET",
+                self.rest_url + "search/JobOrder?query={query}&fields={fields}",
                 path_params={
                     "query": query,
                     "fields": fields,
