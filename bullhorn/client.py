@@ -123,17 +123,6 @@ class BullhornClient:
         # Capture unhandled logic
         raise RuntimeError(response, "Unreachable code in HTTP handling")
 
-    def login(
-        self,
-    ) -> None:
-        # Initialise session
-        self.__session: aiohttp.ClientSession = aiohttp.ClientSession()
-        # Check for valid user sessionz
-        try:
-            ping = self.ping()
-        except HTTPException:
-            raise
-
     def ping(
         self,
     ) -> Response[ping.Ping]:
