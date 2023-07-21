@@ -68,16 +68,6 @@ class BullhornClient:
         # Fetch response
         data: Optional[Union[Dict[str, Any], str]] = None
         for tries in range(5):
-            # Files
-            if files:
-                for f in files:
-                    f.reset(seek=tries)
-            # Form
-            if form:
-                form_data = aiohttp.FormData(quote_fields=False)
-                for params in form:
-                    form_data.add_field(**params)
-                kwargs["data"] = form_data
             # Execute request
             try:
                 response = requests.get(url, headers=headers)
