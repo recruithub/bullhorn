@@ -3,7 +3,18 @@ from bullhorn.client import BullhornClient
 from bullhorn.types import ping
 
 
-def test_bullhorn_client_ping(mocker):
+def test_client_user_agent():
+    # Initialise client
+    bc = BullhornClient(
+        token="12345_1234567_a12345bc-123a-45bc-67de-12345678910a",
+        rest_url="https://rest123.bullhornstaffing.com/rest-services/1234/",
+    )
+    # Get user agent
+    user_agent = bc.user_agent
+    assert "Python wrapper for Bullhorn API" in user_agent
+
+
+def test_client_ping(mocker):
     # Mock response
     return_value: ping.Ping = {"sessionExpires": 1234567891011}
     mocker.patch(
@@ -18,14 +29,3 @@ def test_bullhorn_client_ping(mocker):
     # Get result
     result = bc.ping()
     assert "sessionExpires" in result
-
-
-def test_client_user_agent():
-    # Initialise client
-    bc = BullhornClient(
-        token="12345_1234567_a12345bc-123a-45bc-67de-12345678910a",
-        rest_url="https://rest123.bullhornstaffing.com/rest-services/1234/",
-    )
-    # Get user agent
-    user_agent = bc.user_agent
-    assert "Python wrapper for Bullhorn API" in user_agent
