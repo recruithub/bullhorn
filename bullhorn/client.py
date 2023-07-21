@@ -6,10 +6,15 @@ from typing import Any, Dict, List, Optional, Union
 
 import requests
 
-from .types import candidate, ping, placement
 from bullhorn import __version__
 from bullhorn.exceptions import BullhornServerError, Forbidden, HTTPException, NotFound
 from bullhorn.route import Route
+from bullhorn.types import (
+    candidate,
+    ping,
+    placement,
+    placement_commission,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -146,6 +151,24 @@ class BullhornClient:
             Route(
                 "GET",
                 self.rest_url + "search/Placement?query={query}&fields={fields}",
+                path_params={
+                    "query": query,
+                    "fields": fields,
+                },
+            )
+        )
+        return request
+
+    def get_placement_commissions(
+        self,
+        query: str,
+        fields: str,
+    ) -> List[placement_commission.PlacementCommission]:
+        request = self.request(
+            Route(
+                "GET",
+                self.rest_url
+                + "search/PlacementCommission?query={query}&fields={fields}",
                 path_params={
                     "query": query,
                     "fields": fields,
