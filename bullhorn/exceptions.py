@@ -56,7 +56,7 @@ class HTTPException(BullhornException):
 
         """
         self.response: ClientResponse = response
-        self.status: int = response.status
+        self.status: int = response.status_code
         self.code: int
         self.text: str
 
@@ -76,7 +76,7 @@ class HTTPException(BullhornException):
             self.text = message or ""
             self.code = 0
 
-        fmt = f"{self.response.status} {self.response.reason} (error code: {self.code})"
+        fmt = f"{self.response.status_code} {self.response.reason} (error code: {self.code})"
         if len(self.text):
             fmt += f": {self.text}"
 
