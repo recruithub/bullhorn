@@ -11,6 +11,7 @@ from bullhorn.exceptions import BullhornServerError, Forbidden, HTTPException, N
 from bullhorn.route import Route
 from bullhorn.types import (
     candidate,
+    client_contact,
     ping,
     placement,
     placement_commission,
@@ -134,6 +135,23 @@ class BullhornClient:
             Route(
                 "GET",
                 self.rest_url + "search/Candidate?query={query}&fields={fields}",
+                path_params={
+                    "query": query,
+                    "fields": fields,
+                },
+            )
+        )
+        return request
+
+    def get_client_contacts(
+        self,
+        query: str,
+        fields: str,
+    ) -> List[client_contact.ClientContact]:
+        request = self.request(
+            Route(
+                "GET",
+                self.rest_url + "search/ClientContact?query={query}&fields={fields}",
                 path_params={
                     "query": query,
                     "fields": fields,
