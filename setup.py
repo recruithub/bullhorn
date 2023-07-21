@@ -1,3 +1,4 @@
+from bullhorn import __version__, __title__, __author__, __license__
 from setuptools import setup, find_packages
 
 with open("README.md", "r") as fh:
@@ -5,9 +6,10 @@ with open("README.md", "r") as fh:
 
 
 setup(
-    name="bullhorn",
-    version="0.0.2",
-    author="lloydtao (Lewis Lloyd)",
+    version=__version__,
+    name=__title__,
+    author=__author__,
+    license=__license__,
     author_email="lewis@recruit-hub.com",
     description="Python wrapper for the Bullhorn REST API",
     long_description=long_description,
