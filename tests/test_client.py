@@ -8,6 +8,7 @@ from bullhorn.types import (
     client_corporation,
     corporate_user,
     job_order,
+    job_submission,
     ping,
 )
 
@@ -177,3 +178,38 @@ def test_client_get_job_orders(mocker):
         fields="id,description,owner",
     )
     assert "owner" in result[0]
+
+
+def test_client_get_job_submissions(mocker):
+    # Mock response
+    return_value: List[job_submission.JobSubmission] = [
+        {
+            "id": 1234567891011,
+            "endDate": 1234567891011,
+            "owners": [
+                {
+                    "id": 1234567891011,
+                    "firstName": "Example",
+                    "middleName": "C.",
+                    "lastName": "Name",
+                    "username": "ExampleCName",
+                },
+            ],
+            "startDate": 1234567891012,
+        },
+    ]
+    mocker.patch(
+        "bullhorn.client.BullhornClient.request",
+        return_value=return_value,
+    )
+    # Initialise client
+    bc = BullhornClient(
+        token="12345_1234567_a12345bc-123a-45bc-67de-12345678910a",
+        rest_url="https://rest123.bullhornstaffing.com/rest-services/1234/",
+    )
+    # Get result
+    result = bc.get_job_submissions(
+        query="dateLastModified:{2023/01/01 TO *}",
+        fields="id,endDate,owners,startDate",
+    )
+    assert "owners" in result[0]
