@@ -13,7 +13,6 @@ def get_placements_and_candidates():
         token=token,
         rest_url=rest_url,
     )
-    bc.login()
 
     # Get placements result
     placements = bc.get_placements(
