@@ -6,6 +6,7 @@ from bullhorn.types import (
     candidate,
     client_contact,
     client_corporation,
+    corporate_user,
     ping,
 )
 
@@ -115,3 +116,31 @@ def test_client_get_client_corporations(mocker):
         fields="id,name",
     )
     assert "name" in result[0]
+
+
+def test_client_get_corporate_users(mocker):
+    # Mock response
+    return_value: List[corporate_user.CorporateUser] = [
+        {
+            "id": 1234567891011,
+            "firstName": "Example",
+            "middleName": "C.",
+            "lastName": "Name",
+            "username": "ExampleCName",
+        },
+    ]
+    mocker.patch(
+        "bullhorn.client.BullhornClient.request",
+        return_value=return_value,
+    )
+    # Initialise client
+    bc = BullhornClient(
+        token="12345_1234567_a12345bc-123a-45bc-67de-12345678910a",
+        rest_url="https://rest123.bullhornstaffing.com/rest-services/1234/",
+    )
+    # Get result
+    result = bc.get_corporate_users(
+        query="dateLastModified:{2023/01/01 TO *}",
+        fields="id,firstName,middleName,lastName,username",
+    )
+    assert "username" in result[0]
