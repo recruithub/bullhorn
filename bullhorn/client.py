@@ -50,9 +50,9 @@ class BullhornClient:
     def request(
         self,
         route: Route,
+        json: Optional[Dict] = None,
         files=None,
         form=None,
-        **kwargs,
     ) -> Any:
         # Get attributes from route
         method = route.method
@@ -62,11 +62,8 @@ class BullhornClient:
         headers["User-Agent"] = self.user_agent
         if self.token is not None:
             headers["BhRestToken"] = self.token
-        if "json" in kwargs:
+        if json is not None:
             headers["Content-Type"] = "application/json"
-            kwargs["data"] = json.dumps(
-                kwargs.pop("json"), separators=(",", ":"), ensure_ascii=True
-            )
 
         # Fetch response
         data: Optional[Union[Dict[str, Any], str]] = None
@@ -85,7 +82,7 @@ class BullhornClient:
             try:
                 response = requests.get(url, headers=headers)
                 logger.debug(
-                    f"{method} {url} with {kwargs.get('data')} has returned {response.status_code}"
+                    f"{method} {url} with {data} has returned {response.status_code}"
                 )
                 data = response.json()
                 # Successful request
