@@ -10,6 +10,7 @@ from bullhorn.types import (
     job_order,
     job_submission,
     ping,
+    placement,
 )
 
 
@@ -213,3 +214,28 @@ def test_client_get_job_submissions(mocker):
         fields="id,endDate,owners,startDate",
     )
     assert "owners" in result[0]
+
+
+def test_client_get_placements(mocker):
+    # Mock response
+    return_value: List[placement.Placement] = [
+        {
+            "id": 1234567891011,
+            "fee": 0.5,
+        },
+    ]
+    mocker.patch(
+        "bullhorn.client.BullhornClient.request",
+        return_value=return_value,
+    )
+    # Initialise client
+    bc = BullhornClient(
+        token="12345_1234567_a12345bc-123a-45bc-67de-12345678910a",
+        rest_url="https://rest123.bullhornstaffing.com/rest-services/1234/",
+    )
+    # Get result
+    result = bc.get_placements(
+        query="dateLastModified:{2023/01/01 TO *}",
+        fields="id,fee",
+    )
+    assert "fee" in result[0]
