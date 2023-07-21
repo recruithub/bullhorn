@@ -1,7 +1,5 @@
 from typing import Any, Dict, List, Optional, Tuple, Union
 
-from aiohttp import ClientResponse
-
 
 class BullhornException(Exception):
     """Base exception class for the Bullhorn REST API wrapper library.
@@ -20,7 +18,7 @@ class HTTPException(BullhornException):
 
     def __init__(
         self,
-        response: ClientResponse,
+        response,
         message: Optional[Union[str, Dict[str, Any]]] = None,
     ):
         """
@@ -55,7 +53,7 @@ class HTTPException(BullhornException):
             None
 
         """
-        self.response: ClientResponse = response
+        self.response = response
         self.status: int = response.status_code
         self.code: int
         self.text: str
