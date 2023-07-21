@@ -70,7 +70,9 @@ class BullhornClient:
         for tries in range(5):
             # Execute request
             try:
-                response = requests.get(url, headers=headers)
+                response = requests.request(
+                    method=method, url=url, headers=headers, json=json
+                )
                 logger.debug(
                     f"{method} {url} with {data} has returned {response.status_code}"
                 )
