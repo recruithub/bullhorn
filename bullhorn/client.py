@@ -15,6 +15,7 @@ from bullhorn.types import (
     client_corporation,
     corporate_user,
     job_order,
+    job_submission,
     ping,
     placement,
     placement_commission,
@@ -207,6 +208,23 @@ class BullhornClient:
             Route(
                 "GET",
                 self.rest_url + "search/JobOrder?query={query}&fields={fields}",
+                path_params={
+                    "query": query,
+                    "fields": fields,
+                },
+            )
+        )
+        return request
+
+    def get_job_submissions(
+        self,
+        query: str,
+        fields: str,
+    ) -> List[job_submission.JobSubmission]:
+        request = self.request(
+            Route(
+                "GET",
+                self.rest_url + "search/JobSubmission?query={query}&fields={fields}",
                 path_params={
                     "query": query,
                     "fields": fields,
