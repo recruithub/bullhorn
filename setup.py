@@ -15,7 +15,7 @@ setup(
     url="https://github.com/recruithub/bullhorn",
     packages=find_packages(),
     install_requires=[
-        "aiohttp==3.8.4",
+        "requests==2.31.0",
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
