@@ -4,7 +4,7 @@ import sys
 import time
 from typing import Any, Callable, Coroutine, Dict, List, Optional, TypeVar, Union
 
-import aiohttp
+import requests
 
 from . import __version__
 from .exceptions import BullhornServerError, Forbidden, HTTPException, NotFound
@@ -24,8 +24,6 @@ class BullhornClient:
         token: Optional[str] = None,
         rest_url: Optional[str] = None,
     ) -> None:
-        # Initialise session variable
-        self.__session: aiohttp.ClientSession = None
         # Set token and namespace
         self.token: Optional[str] = token
         self.rest_url: Optional[str] = rest_url
@@ -48,7 +46,7 @@ class BullhornClient:
             "Python wrapper for Bullhorn API",
             f"(https://github.com/recruithub/bullhorn {__version__})",
             f"Python/{version_info.major}.{version_info.minor}.{version_info.micro}",
-            f"aiohttp/{aiohttp.__version__}",
+            f"requests/{requests.__version__}",
         ]
         user_agent = " ".join(user_agent_strings)
         return user_agent
@@ -73,10 +71,8 @@ class BullhornClient:
             kwargs["data"] = json.dumps(
                 kwargs.pop("json"), separators=(",", ":"), ensure_ascii=True
             )
-        kwargs["headers"] = headers
 
         # Fetch response
-        response: Optional[aiohttp.ClientResponse] = None
         data: Optional[Union[Dict[str, Any], str]] = None
         for tries in range(5):
             # Files
@@ -91,28 +87,28 @@ class BullhornClient:
                 kwargs["data"] = form_data
             # Execute request
             try:
-                with self.__session.request(method, url, **kwargs) as response:
-                    logger.debug(
-                        f"{method} {url} with {kwargs.get('data')} has returned {response.status}"
-                    )
-                    data = response.json(encoding="utf-8")
-                    # Successful request
-                    if 300 > response.status >= 200:
-                        logger.debug(f"{method} {url} has received {data}")
-                        return data
-                    # Server error, so retry request with exponential back-off
-                    if response.status in {500, 502, 503, 504, 524}:
-                        time.sleep(1 + tries * 2)
-                        continue
-                    # Client error, so raise exception
-                    if response.status == 403:
-                        raise Forbidden(response, data)
-                    elif response.status == 404:
-                        raise NotFound(response, data)
-                    elif response.status >= 500:
-                        raise BullhornServerError(response, data)
-                    else:
-                        raise HTTPException(response, data)
+                response = requests.get(url, headers=headers)
+                logger.debug(
+                    f"{method} {url} with {kwargs.get('data')} has returned {response.status_code}"
+                )
+                data = response.json()
+                # Successful request
+                if 300 > response.status_code >= 200:
+                    logger.debug(f"{method} {url} has received {data}")
+                    return data
+                # Server error, so retry request with exponential back-off
+                if response.status_code in {500, 502, 503, 504, 524}:
+                    time.sleep(1 + tries * 2)
+                    continue
+                # Client error, so raise exception
+                if response.status_code == 403:
+                    raise Forbidden(response, data)
+                elif response.status_code == 404:
+                    raise NotFound(response, data)
+                elif response.status_code >= 500:
+                    raise BullhornServerError(response, data)
+                else:
+                    raise HTTPException(response, data)
             except OSError as e:
                 # Connection reset by peer, so retry with exponential back-off
                 if tries < 4 and e.errno in (54, 10054):
@@ -121,7 +117,7 @@ class BullhornClient:
                 raise
         if response is not None:
             # Out of retries, so raise an appropriate exception
-            if response.status >= 500:
+            if response.status_code >= 500:
                 raise BullhornServerError(response, data)
             raise HTTPException(response, data)
         # Capture unhandled logic
