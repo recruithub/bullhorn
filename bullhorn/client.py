@@ -257,7 +257,8 @@ class BullhornClient:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "query/PlacementCommission?where={where}&fields={fields}",
+                self.rest_url
+                + "query/PlacementCommission?where={where}&fields={fields}",
                 path_params={
                     "where": where,
                     "fields": fields,
