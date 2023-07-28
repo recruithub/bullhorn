@@ -308,7 +308,7 @@ def test_client_get_placement_commissions(mocker):
     )
     # Get result
     result = bc.get_placement_commissions(
-        query="dateLastModified:{2023/01/01 TO *}",
+        where="id >= 0",
         fields="id,user,commissionPercentage",
     )
     assert "commissionPercentage" in result[0]

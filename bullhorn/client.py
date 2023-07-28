@@ -251,16 +251,15 @@ class BullhornClient:
 
     def get_placement_commissions(
         self,
-        query: str,
+        where: str,
         fields: str,
     ) -> List[placement_commission.PlacementCommission]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url
-                + "search/PlacementCommission?query={query}&fields={fields}",
+                self.rest_url + "query/PlacementCommission?where={where}&fields={fields}",
                 path_params={
-                    "query": query,
+                    "where": where,
                     "fields": fields,
                 },
             )
