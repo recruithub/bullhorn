@@ -164,7 +164,7 @@ def test_client_get_corporate_users(mocker):
     )
     # Get result
     result = bc.get_corporate_users(
-        query="dateLastModified:{2023/01/01 TO *}",
+        where="id >= 0",
         fields="id,firstName,middleName,lastName,username",
     )
     assert "username" in result[0]
