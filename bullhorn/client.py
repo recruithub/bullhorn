@@ -145,7 +145,7 @@ class BullhornClient:
                 },
             )
         )
-        return request
+        return request["data"]
 
     def get_client_contacts(
         self,
@@ -162,7 +162,7 @@ class BullhornClient:
                 },
             )
         )
-        return request
+        return request["data"]
 
     def get_client_corporations(
         self,
@@ -180,24 +180,24 @@ class BullhornClient:
                 },
             )
         )
-        return request
+        return request["data"]
 
     def get_corporate_users(
         self,
-        query: str,
+        where: str,
         fields: str,
     ) -> List[corporate_user.CorporateUser]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "search/CorporateUser?query={query}&fields={fields}",
+                self.rest_url + "query/CorporateUser?where={where}&fields={fields}",
                 path_params={
-                    "query": query,
+                    "where": where,
                     "fields": fields,
                 },
             )
         )
-        return request
+        return request["data"]
 
     def get_job_orders(
         self,
@@ -214,7 +214,7 @@ class BullhornClient:
                 },
             )
         )
-        return request
+        return request["data"]
 
     def get_job_submissions(
         self,
@@ -231,7 +231,7 @@ class BullhornClient:
                 },
             )
         )
-        return request
+        return request["data"]
 
     def get_placements(
         self,
@@ -248,7 +248,7 @@ class BullhornClient:
                 },
             )
         )
-        return request
+        return request["data"]
 
     def get_placement_commissions(
         self,
@@ -266,4 +266,4 @@ class BullhornClient:
                 },
             )
         )
-        return request
+        return request["data"]

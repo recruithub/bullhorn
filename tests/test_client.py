@@ -45,14 +45,19 @@ def test_client_ping(mocker):
 
 def test_client_get_candidates(mocker):
     # Mock response
-    return_value: List[candidate.Candidate] = [
-        {
-            "id": 1234567891011,
-            "firstName": "Example",
-            "middleName": "C.",
-            "lastName": "Name",
-        },
-    ]
+    return_value = {
+        "total": 1,
+        "start": 0,
+        "count": 1,
+        "data": [
+            {
+                "id": 1234567891011,
+                "firstName": "Example",
+                "middleName": "C.",
+                "lastName": "Name",
+            },
+        ],
+    }
     mocker.patch(
         "bullhorn.client.BullhornClient.request",
         return_value=return_value,
@@ -72,14 +77,19 @@ def test_client_get_candidates(mocker):
 
 def test_client_get_client_contacts(mocker):
     # Mock response
-    return_value: List[client_contact.ClientContact] = [
-        {
-            "id": 1234567891011,
-            "firstName": "Example",
-            "middleName": "C.",
-            "lastName": "Name",
-        },
-    ]
+    return_value = {
+        "total": 1,
+        "start": 0,
+        "count": 1,
+        "data": [
+            {
+                "id": 1234567891011,
+                "firstName": "Example",
+                "middleName": "C.",
+                "lastName": "Name",
+            },
+        ],
+    }
     mocker.patch(
         "bullhorn.client.BullhornClient.request",
         return_value=return_value,
@@ -99,12 +109,17 @@ def test_client_get_client_contacts(mocker):
 
 def test_client_get_client_corporations(mocker):
     # Mock response
-    return_value: List[client_corporation.ClientCorporation] = [
-        {
-            "id": 1234567891011,
-            "name": "Example Inc.",
-        },
-    ]
+    return_value = {
+        "total": 1,
+        "start": 0,
+        "count": 1,
+        "data": [
+            {
+                "id": 1234567891011,
+                "name": "Example Inc.",
+            },
+        ],
+    }
     mocker.patch(
         "bullhorn.client.BullhornClient.request",
         return_value=return_value,
@@ -124,15 +139,20 @@ def test_client_get_client_corporations(mocker):
 
 def test_client_get_corporate_users(mocker):
     # Mock response
-    return_value: List[corporate_user.CorporateUser] = [
-        {
-            "id": 1234567891011,
-            "firstName": "Example",
-            "middleName": "C.",
-            "lastName": "Name",
-            "username": "ExampleCName",
-        },
-    ]
+    return_value = {
+        "total": 1,
+        "start": 0,
+        "count": 1,
+        "data": [
+            {
+                "id": 1234567891011,
+                "firstName": "Example",
+                "middleName": "C.",
+                "lastName": "Name",
+                "username": "ExampleCName",
+            },
+        ],
+    }
     mocker.patch(
         "bullhorn.client.BullhornClient.request",
         return_value=return_value,
@@ -152,19 +172,24 @@ def test_client_get_corporate_users(mocker):
 
 def test_client_get_job_orders(mocker):
     # Mock response
-    return_value: List[job_order.JobOrder] = [
-        {
-            "id": 1234567891011,
-            "description": "An example open job to be filled.",
-            "owner": {
+    return_value = {
+        "total": 1,
+        "start": 0,
+        "count": 1,
+        "data": [
+            {
                 "id": 1234567891011,
-                "firstName": "Example",
-                "middleName": "C.",
-                "lastName": "Name",
-                "username": "ExampleCName",
+                "description": "An example open job to be filled.",
+                "owner": {
+                    "id": 1234567891011,
+                    "firstName": "Example",
+                    "middleName": "C.",
+                    "lastName": "Name",
+                    "username": "ExampleCName",
+                },
             },
-        },
-    ]
+        ],
+    }
     mocker.patch(
         "bullhorn.client.BullhornClient.request",
         return_value=return_value,
@@ -184,22 +209,27 @@ def test_client_get_job_orders(mocker):
 
 def test_client_get_job_submissions(mocker):
     # Mock response
-    return_value: List[job_submission.JobSubmission] = [
-        {
-            "id": 1234567891011,
-            "endDate": 1234567891011,
-            "owners": [
-                {
-                    "id": 1234567891011,
-                    "firstName": "Example",
-                    "middleName": "C.",
-                    "lastName": "Name",
-                    "username": "ExampleCName",
-                },
-            ],
-            "startDate": 1234567891012,
-        },
-    ]
+    return_value = {
+        "total": 1,
+        "start": 0,
+        "count": 1,
+        "data": [
+            {
+                "id": 1234567891011,
+                "endDate": 1234567891011,
+                "owners": [
+                    {
+                        "id": 1234567891011,
+                        "firstName": "Example",
+                        "middleName": "C.",
+                        "lastName": "Name",
+                        "username": "ExampleCName",
+                    },
+                ],
+                "startDate": 1234567891012,
+            },
+        ],
+    }
     mocker.patch(
         "bullhorn.client.BullhornClient.request",
         return_value=return_value,
@@ -219,12 +249,17 @@ def test_client_get_job_submissions(mocker):
 
 def test_client_get_placements(mocker):
     # Mock response
-    return_value: List[placement.Placement] = [
-        {
-            "id": 1234567891011,
-            "fee": 0.5,
-        },
-    ]
+    return_value = {
+        "total": 1,
+        "start": 0,
+        "count": 1,
+        "data": [
+            {
+                "id": 1234567891011,
+                "fee": 0.5,
+            },
+        ],
+    }
     mocker.patch(
         "bullhorn.client.BullhornClient.request",
         return_value=return_value,
@@ -244,19 +279,24 @@ def test_client_get_placements(mocker):
 
 def test_client_get_placement_commissions(mocker):
     # Mock response
-    return_value: List[placement_commission.PlacementCommission] = [
-        {
-            "id": 1234567891011,
-            "user": {
+    return_value = {
+        "total": 1,
+        "start": 0,
+        "count": 1,
+        "data": [
+            {
                 "id": 1234567891011,
-                "firstName": "Example",
-                "middleName": "C.",
-                "lastName": "Name",
-                "username": "ExampleCName",
+                "user": {
+                    "id": 1234567891011,
+                    "firstName": "Example",
+                    "middleName": "C.",
+                    "lastName": "Name",
+                    "username": "ExampleCName",
+                },
+                "commissionPercentage": 0.05,
             },
-            "commissionPercentage": 0.05,
-        },
-    ]
+        ],
+    }
     mocker.patch(
         "bullhorn.client.BullhornClient.request",
         return_value=return_value,
