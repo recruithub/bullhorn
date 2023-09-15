@@ -25,6 +25,7 @@ from bullhorn.types import (
     job_submission,
     job_submission_history,
     lead,
+    lead_history,
     ping,
     placement,
     placement_commission,
@@ -407,6 +408,23 @@ class BullhornClient:
             Route(
                 "GET",
                 self.rest_url + "search/Lead?query={query}&fields={fields}",
+                path_params={
+                    "query": query,
+                    "fields": fields,
+                },
+            )
+        )
+        return request["data"]
+
+    def get_lead_histories(
+        self,
+        query: str,
+        fields: str,
+    ) -> List[lead_history.LeadHistory]:
+        request = self.request(
+            Route(
+                "GET",
+                self.rest_url + "search/LeadHistory?query={query}&fields={fields}",
                 path_params={
                     "query": query,
                     "fields": fields,
