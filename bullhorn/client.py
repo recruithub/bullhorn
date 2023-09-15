@@ -32,6 +32,7 @@ from bullhorn.types import (
     ping,
     placement,
     placement_commission,
+    sendout,
 )
 
 logger = logging.getLogger(__name__)
@@ -517,6 +518,23 @@ class BullhornClient:
                 + "query/PlacementCommission?where={where}&fields={fields}",
                 path_params={
                     "where": where,
+                    "fields": fields,
+                },
+            )
+        )
+        return request["data"]
+
+    def get_sendouts(
+        self,
+        query: str,
+        fields: str,
+    ) -> List[sendout.Sendout]:
+        request = self.request(
+            Route(
+                "GET",
+                self.rest_url + "search/Sendout?query={query}&fields={fields}",
+                path_params={
+                    "query": query,
                     "fields": fields,
                 },
             )
