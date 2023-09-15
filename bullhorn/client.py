@@ -9,6 +9,7 @@ from bullhorn import __version__
 from bullhorn.exceptions import BullhornServerError, Forbidden, HTTPException, NotFound
 from bullhorn.route import Route
 from bullhorn.types import (
+    appointment,
     candidate,
     client_contact,
     client_corporation,
@@ -125,6 +126,23 @@ class BullhornClient:
             Route(
                 "GET",
                 self.rest_url + "ping",
+            )
+        )
+        return request
+
+    def get_appointments(
+        self,
+        query: str,
+        fields: str,
+    ) -> List[appointment.Appointment]:
+        request = self.request(
+            Route(
+                "GET",
+                self.rest_url + "search/Appointment?query={query}&fields={fields}",
+                path_params={
+                    "query": query,
+                    "fields": fields,
+                },
             )
         )
         return request
