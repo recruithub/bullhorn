@@ -1,0 +1,2 @@
+class BusinessSector:
+    pass
