@@ -20,6 +20,7 @@ from bullhorn.types import (
     country,
     department,
     employee_pay,
+    employer_contribution,
     job_order,
     job_submission,
     ping,
@@ -317,6 +318,24 @@ class BullhornClient:
             Route(
                 "GET",
                 self.rest_url + "search/EmployeePay?query={query}&fields={fields}",
+                path_params={
+                    "query": query,
+                    "fields": fields,
+                },
+            )
+        )
+        return request["data"]
+
+    def get_employer_contributions(
+        self,
+        query: str,
+        fields: str,
+    ) -> List[employer_contribution.EmployerContribution]:
+        request = self.request(
+            Route(
+                "GET",
+                self.rest_url
+                + "search/EmployerContribution?query={query}&fields={fields}",
                 path_params={
                     "query": query,
                     "fields": fields,
