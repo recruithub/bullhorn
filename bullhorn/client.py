@@ -28,6 +28,7 @@ from bullhorn.types import (
     lead_history,
     location,
     opportunity,
+    opportunity_history,
     ping,
     placement,
     placement_commission,
@@ -461,6 +462,24 @@ class BullhornClient:
             Route(
                 "GET",
                 self.rest_url + "search/Opportunity?query={query}&fields={fields}",
+                path_params={
+                    "query": query,
+                    "fields": fields,
+                },
+            )
+        )
+        return request["data"]
+
+    def get_opportunity_histories(
+        self,
+        query: str,
+        fields: str,
+    ) -> List[opportunity_history.OpportunityHistory]:
+        request = self.request(
+            Route(
+                "GET",
+                self.rest_url
+                + "search/OpportunityHistory?query={query}&fields={fields}",
                 path_params={
                     "query": query,
                     "fields": fields,
