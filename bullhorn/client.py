@@ -12,6 +12,7 @@ from bullhorn.types import (
     appointment,
     business_sector,
     candidate,
+    category,
     client_contact,
     client_corporation,
     corporate_user,
@@ -181,6 +182,23 @@ class BullhornClient:
             )
         )
         return request["data"]
+
+    def get_categories(
+        self,
+        query: str,
+        fields: str,
+    ) -> List[category.Category]:
+        request = self.request(
+            Route(
+                "GET",
+                self.rest_url + "search/Category?query={query}&fields={fields}",
+                path_params={
+                    "query": query,
+                    "fields": fields,
+                },
+            )
+        )
+        return request
 
     def get_client_contacts(
         self,
