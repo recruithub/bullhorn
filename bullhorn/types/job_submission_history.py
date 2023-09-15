@@ -1,0 +1,2 @@
+class JobSubmissionHistory:
+    pass
