@@ -1,3 +1,5 @@
+import os
+
 from typing import List
 
 from bullhorn import __version__
@@ -14,12 +16,26 @@ from bullhorn.types import (
     placement_commission,
 )
 
+# Set test suite defaults
+TEST_SESSION_TOKEN = os.environ.get(
+    "TEST_SESSION_TOKEN",
+    "https://rest123.bullhornstaffing.com/rest-services/1234/",
+)
+TEST_REST_URL = os.environ.get(
+    "TEST_REST_URL",
+    "12345_1234567_a12345bc-123a-45bc-67de-12345678910a",
+)
+TEST_USE_ENV_CREDENTIALS = os.environ.get(
+    "TEST_USE_ENV_CREDENTIALS",
+    False,
+)
+
 
 def test_client_user_agent():
     # Initialise client
     bc = BullhornClient(
-        token="12345_1234567_a12345bc-123a-45bc-67de-12345678910a",
-        rest_url="https://rest123.bullhornstaffing.com/rest-services/1234/",
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
     )
     # Get user agent
     user_agent = bc.user_agent
@@ -29,14 +45,15 @@ def test_client_user_agent():
 def test_client_ping(mocker):
     # Mock response
     return_value: ping.Ping = {"sessionExpires": 1234567891011}
-    mocker.patch(
-        "bullhorn.client.BullhornClient.request",
-        return_value=return_value,
-    )
+    if not TEST_USE_ENV_CREDENTIALS:
+        mocker.patch(
+            "bullhorn.client.BullhornClient.request",
+            return_value=return_value,
+        )
     # Initialise client
     bc = BullhornClient(
-        token="12345_1234567_a12345bc-123a-45bc-67de-12345678910a",
-        rest_url="https://rest123.bullhornstaffing.com/rest-services/1234/",
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
     )
     # Get result
     result = bc.ping()
@@ -58,14 +75,15 @@ def test_client_get_candidates(mocker):
             },
         ],
     }
-    mocker.patch(
-        "bullhorn.client.BullhornClient.request",
-        return_value=return_value,
-    )
+    if not TEST_USE_ENV_CREDENTIALS:
+        mocker.patch(
+            "bullhorn.client.BullhornClient.request",
+            return_value=return_value,
+        )
     # Initialise client
     bc = BullhornClient(
-        token="12345_1234567_a12345bc-123a-45bc-67de-12345678910a",
-        rest_url="https://rest123.bullhornstaffing.com/rest-services/1234/",
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
     )
     # Get result
     result = bc.get_candidates(
@@ -90,14 +108,15 @@ def test_client_get_client_contacts(mocker):
             },
         ],
     }
-    mocker.patch(
-        "bullhorn.client.BullhornClient.request",
-        return_value=return_value,
-    )
+    if not TEST_USE_ENV_CREDENTIALS:
+        mocker.patch(
+            "bullhorn.client.BullhornClient.request",
+            return_value=return_value,
+        )
     # Initialise client
     bc = BullhornClient(
-        token="12345_1234567_a12345bc-123a-45bc-67de-12345678910a",
-        rest_url="https://rest123.bullhornstaffing.com/rest-services/1234/",
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
     )
     # Get result
     result = bc.get_client_contacts(
@@ -120,14 +139,15 @@ def test_client_get_client_corporations(mocker):
             },
         ],
     }
-    mocker.patch(
-        "bullhorn.client.BullhornClient.request",
-        return_value=return_value,
-    )
+    if not TEST_USE_ENV_CREDENTIALS:
+        mocker.patch(
+            "bullhorn.client.BullhornClient.request",
+            return_value=return_value,
+        )
     # Initialise client
     bc = BullhornClient(
-        token="12345_1234567_a12345bc-123a-45bc-67de-12345678910a",
-        rest_url="https://rest123.bullhornstaffing.com/rest-services/1234/",
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
     )
     # Get result
     result = bc.get_client_corporations(
@@ -153,14 +173,15 @@ def test_client_get_corporate_users(mocker):
             },
         ],
     }
-    mocker.patch(
-        "bullhorn.client.BullhornClient.request",
-        return_value=return_value,
-    )
+    if not TEST_USE_ENV_CREDENTIALS:
+        mocker.patch(
+            "bullhorn.client.BullhornClient.request",
+            return_value=return_value,
+        )
     # Initialise client
     bc = BullhornClient(
-        token="12345_1234567_a12345bc-123a-45bc-67de-12345678910a",
-        rest_url="https://rest123.bullhornstaffing.com/rest-services/1234/",
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
     )
     # Get result
     result = bc.get_corporate_users(
@@ -190,14 +211,15 @@ def test_client_get_job_orders(mocker):
             },
         ],
     }
-    mocker.patch(
-        "bullhorn.client.BullhornClient.request",
-        return_value=return_value,
-    )
+    if not TEST_USE_ENV_CREDENTIALS:
+        mocker.patch(
+            "bullhorn.client.BullhornClient.request",
+            return_value=return_value,
+        )
     # Initialise client
     bc = BullhornClient(
-        token="12345_1234567_a12345bc-123a-45bc-67de-12345678910a",
-        rest_url="https://rest123.bullhornstaffing.com/rest-services/1234/",
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
     )
     # Get result
     result = bc.get_job_orders(
@@ -230,14 +252,15 @@ def test_client_get_job_submissions(mocker):
             },
         ],
     }
-    mocker.patch(
-        "bullhorn.client.BullhornClient.request",
-        return_value=return_value,
-    )
+    if not TEST_USE_ENV_CREDENTIALS:
+        mocker.patch(
+            "bullhorn.client.BullhornClient.request",
+            return_value=return_value,
+        )
     # Initialise client
     bc = BullhornClient(
-        token="12345_1234567_a12345bc-123a-45bc-67de-12345678910a",
-        rest_url="https://rest123.bullhornstaffing.com/rest-services/1234/",
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
     )
     # Get result
     result = bc.get_job_submissions(
@@ -260,14 +283,15 @@ def test_client_get_placements(mocker):
             },
         ],
     }
-    mocker.patch(
-        "bullhorn.client.BullhornClient.request",
-        return_value=return_value,
-    )
+    if not TEST_USE_ENV_CREDENTIALS:
+        mocker.patch(
+            "bullhorn.client.BullhornClient.request",
+            return_value=return_value,
+        )
     # Initialise client
     bc = BullhornClient(
-        token="12345_1234567_a12345bc-123a-45bc-67de-12345678910a",
-        rest_url="https://rest123.bullhornstaffing.com/rest-services/1234/",
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
     )
     # Get result
     result = bc.get_placements(
@@ -297,14 +321,15 @@ def test_client_get_placement_commissions(mocker):
             },
         ],
     }
-    mocker.patch(
-        "bullhorn.client.BullhornClient.request",
-        return_value=return_value,
-    )
+    if not TEST_USE_ENV_CREDENTIALS:
+        mocker.patch(
+            "bullhorn.client.BullhornClient.request",
+            return_value=return_value,
+        )
     # Initialise client
     bc = BullhornClient(
-        token="12345_1234567_a12345bc-123a-45bc-67de-12345678910a",
-        rest_url="https://rest123.bullhornstaffing.com/rest-services/1234/",
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
     )
     # Get result
     result = bc.get_placement_commissions(
