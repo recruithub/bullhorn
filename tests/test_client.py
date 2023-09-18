@@ -87,8 +87,8 @@ def test_client_get_candidates(mocker):
     )
     # Get result
     result = bc.get_candidates(
-        fields="id,firstName,middleName,lastName",
         query="dateLastModified:{1970/01/01 TO *}",
+        fields="id,businessSectors,candidateSource,category,companyName,dateAdded,email,firstName,interviews,isDeleted,lastName,leads,mobile,name,occupation,owner,payrollStatus,salary,source,status,submissions,userDateAdded",
     )
     assert "firstName" in result[0]
 
@@ -121,7 +121,7 @@ def test_client_get_client_contacts(mocker):
     # Get result
     result = bc.get_client_contacts(
         query="dateLastModified:{2023/01/01 TO *}",
-        fields="id,firstName,middleName,lastName",
+        fields="id,businessSectors,category,clientCorporation,dateAdded,dateLastModified,division,email,firstName,isDeleted,lastName,leads,name,occupation,owner,source,status,type",
     )
     assert "lastName" in result[0]
 
@@ -152,7 +152,7 @@ def test_client_get_client_corporations(mocker):
     # Get result
     result = bc.get_client_corporations(
         query="dateLastModified:{2023/01/01 TO *}",
-        fields="id,name",
+        fields="id,businessSectorList,clientContacts,companyURL,dateAdded,dateFounded,dateLastModified,department,exemptionStatus,feeArrangement,industryList,leads,name,owners,revenue,status",
     )
     assert "name" in result[0]
 
@@ -186,7 +186,7 @@ def test_client_get_corporate_users(mocker):
     # Get result
     result = bc.get_corporate_users(
         where="id >= 0",
-        fields="id,firstName,middleName,lastName,username",
+        fields="id,email,firstName,isDeleted,lastName,mobile,name,occupation,status,userType,username",
     )
     assert "username" in result[0]
 
@@ -224,7 +224,7 @@ def test_client_get_job_orders(mocker):
     # Get result
     result = bc.get_job_orders(
         query="dateLastModified:{2023/01/01 TO *}",
-        fields="id,description,owner",
+        fields="id,appointments,approvedPlacements,assignedUsers,billRateCategoryID,billingProfile,bonusPackage,branch,businessSectors,categories,clientBillRate,clientContact,clientCorporation,dateAdded,dateClosed,dateEnd,dateLastModified,description,durationWeeks,employmentType,feeArrangement,interviews,isDeleted,isOpen,isPublic,jobCode,numOpenings,opportunity,owner,payRate,placements,reasonClosed,salary,salaryUnit,source,startDate,status,submissions,title,usersAssigned",
     )
     assert "owner" in result[0]
 
@@ -265,7 +265,7 @@ def test_client_get_job_submissions(mocker):
     # Get result
     result = bc.get_job_submissions(
         query="dateLastModified:{2023/01/01 TO *}",
-        fields="id,endDate,owners,startDate",
+        fields="id,appointments,billRate,candidate,dateAdded,dateLastModified,endDate,isDeleted,jobOrder,latestAppointment,owners,payRate,salary,sendingUser,source,startDate,status",
     )
     assert "owners" in result[0]
 
@@ -296,7 +296,7 @@ def test_client_get_placements(mocker):
     # Get result
     result = bc.get_placements(
         query="dateLastModified:{2023/01/01 TO *}",
-        fields="id,fee",
+        fields="id,appointments,billingFrequency,bonusPackage,candidate,clientBillRate,clientOvertimeRate,commissions,dateAdded,dateBegin,dateClientEffective,dateEffective,dateEnd,dateLastModified,durationWeeks,employeeType,employmentStartDate,employmentType,fee,jobOrder,jobSubmission,location,owner,payRate,salary,salaryUnit,status",
     )
     assert "fee" in result[0]
 
@@ -334,6 +334,6 @@ def test_client_get_placement_commissions(mocker):
     # Get result
     result = bc.get_placement_commissions(
         where="id >= 0",
-        fields="id,user,commissionPercentage",
+        fields="id,commissionPercentage,dateAdded,dateLastModified,flatPayout,grossMarginPercentage,hourlyPayout,placement,role,status,user",
     )
     assert "commissionPercentage" in result[0]
