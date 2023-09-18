@@ -120,7 +120,7 @@ def test_client_get_client_contacts(mocker):
     )
     # Get result
     result = bc.get_client_contacts(
-        query="dateLastModified:{2023/01/01 TO *}",
+        where="id >= 0",
         fields="id,businessSectors,category,clientCorporation,dateAdded,dateLastModified,division,email,firstName,isDeleted,lastName,leads,name,occupation,owner,source,status,type",
     )
     assert "lastName" in result[0]
@@ -151,7 +151,7 @@ def test_client_get_client_corporations(mocker):
     )
     # Get result
     result = bc.get_client_corporations(
-        query="dateLastModified:{2023/01/01 TO *}",
+        where="id >= 0",
         fields="id,businessSectorList,clientContacts,companyURL,dateAdded,dateFounded,dateLastModified,department,exemptionStatus,feeArrangement,industryList,leads,name,owners,revenue,status",
     )
     assert "name" in result[0]
@@ -223,7 +223,7 @@ def test_client_get_job_orders(mocker):
     )
     # Get result
     result = bc.get_job_orders(
-        query="dateLastModified:{2023/01/01 TO *}",
+        where="id >= 0",
         fields="id,appointments,approvedPlacements,assignedUsers,billRateCategoryID,billingProfile,bonusPackage,branch,businessSectors,categories,clientBillRate,clientContact,clientCorporation,dateAdded,dateClosed,dateEnd,dateLastModified,description,durationWeeks,employmentType,feeArrangement,interviews,isDeleted,isOpen,isPublic,jobCode,numOpenings,opportunity,owner,payRate,placements,reasonClosed,salary,salaryUnit,source,startDate,status,submissions,title,usersAssigned",
     )
     assert "owner" in result[0]
@@ -264,7 +264,7 @@ def test_client_get_job_submissions(mocker):
     )
     # Get result
     result = bc.get_job_submissions(
-        query="dateLastModified:{2023/01/01 TO *}",
+        where="id >= 0",
         fields="id,appointments,billRate,candidate,dateAdded,dateLastModified,endDate,isDeleted,jobOrder,latestAppointment,owners,payRate,salary,sendingUser,source,startDate,status",
     )
     assert "owners" in result[0]
@@ -295,7 +295,7 @@ def test_client_get_placements(mocker):
     )
     # Get result
     result = bc.get_placements(
-        query="dateLastModified:{2023/01/01 TO *}",
+        where="id >= 0",
         fields="id,appointments,billingFrequency,bonusPackage,candidate,clientBillRate,clientOvertimeRate,commissions,dateAdded,dateBegin,dateClientEffective,dateEffective,dateEnd,dateLastModified,durationWeeks,employeeType,employmentStartDate,employmentType,fee,jobOrder,jobSubmission,location,owner,payRate,salary,salaryUnit,status",
     )
     assert "fee" in result[0]
