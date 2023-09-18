@@ -87,8 +87,8 @@ def test_client_get_candidates(mocker):
     )
     # Get result
     result = bc.get_candidates(
-        query="dateLastModified:{2023/01/01 TO *}",
         fields="id,firstName,middleName,lastName",
+        query="dateLastModified:{1970/01/01 TO *}",
     )
     assert "firstName" in result[0]
 
