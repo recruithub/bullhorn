@@ -60,6 +60,66 @@ def test_client_ping(mocker):
     assert "sessionExpires" in result
 
 
+def test_client_get_appointments(mocker):
+    # Mock response
+    return_value = {
+        "total": 1,
+        "start": 0,
+        "count": 1,
+        "data": [
+            {
+                "id": 1234567891011,
+            },
+        ],
+    }
+    if not TEST_USE_ENV_CREDENTIALS:
+        mocker.patch(
+            "bullhorn.client.BullhornClient.request",
+            return_value=return_value,
+        )
+    # Initialise client
+    bc = BullhornClient(
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
+    )
+    # Get result
+    result = bc.get_appointments(
+        where="id >= 0",
+        fields="id,candidateReference,clientContactReference,communicationMethod,dateAdded,dateBegin,isDeleted,jobOrder,lead,opportunity,owner,placement,type",
+    )
+    assert (len(result) == 0) or ("id" in result[0])
+
+
+def test_client_get_business_sectors(mocker):
+    # Mock response
+    return_value = {
+        "total": 1,
+        "start": 0,
+        "count": 1,
+        "data": [
+            {
+                "id": 1234567891011,
+            },
+        ],
+    }
+    if not TEST_USE_ENV_CREDENTIALS:
+        mocker.patch(
+            "bullhorn.client.BullhornClient.request",
+            return_value=return_value,
+        )
+    # Initialise client
+    bc = BullhornClient(
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
+    )
+    # Get result
+    result = bc.get_business_sectors(
+        where="id >= 0",
+        fields="id,dateAdded,name",
+    )
+    assert (len(result) == 0) or ("id" in result[0])
+
+
 def test_client_get_candidates(mocker):
     # Mock response
     return_value = {
@@ -91,6 +151,36 @@ def test_client_get_candidates(mocker):
         fields="id,businessSectors,candidateSource,category,companyName,dateAdded,email,firstName,interviews,isDeleted,lastName,leads,mobile,name,occupation,owner,payrollStatus,salary,source,status,submissions,userDateAdded",
     )
     assert "firstName" in result[0]
+
+
+def test_client_get_categories(mocker):
+    # Mock response
+    return_value = {
+        "total": 1,
+        "start": 0,
+        "count": 1,
+        "data": [
+            {
+                "id": 1234567891011,
+            },
+        ],
+    }
+    if not TEST_USE_ENV_CREDENTIALS:
+        mocker.patch(
+            "bullhorn.client.BullhornClient.request",
+            return_value=return_value,
+        )
+    # Initialise client
+    bc = BullhornClient(
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
+    )
+    # Get result
+    result = bc.get_categories(
+        where="id >= 0",
+        fields="id,dateAdded,name,occupation,type",
+    )
+    assert (len(result) == 0) or ("id" in result[0])
 
 
 def test_client_get_client_contacts(mocker):
@@ -157,6 +247,36 @@ def test_client_get_client_corporations(mocker):
     assert "name" in result[0]
 
 
+def test_client_get_client_corporation_appointments(mocker):
+    # Mock response
+    return_value = {
+        "total": 1,
+        "start": 0,
+        "count": 1,
+        "data": [
+            {
+                "id": 1234567891011,
+            },
+        ],
+    }
+    if not TEST_USE_ENV_CREDENTIALS:
+        mocker.patch(
+            "bullhorn.client.BullhornClient.request",
+            return_value=return_value,
+        )
+    # Initialise client
+    bc = BullhornClient(
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
+    )
+    # Get result
+    result = bc.get_client_corporation_appointments(
+        where="id >= 0",
+        fields="id,clientCorporation,clientContact,appointment",
+    )
+    assert (len(result) == 0) or ("id" in result[0])
+
+
 def test_client_get_corporate_users(mocker):
     # Mock response
     return_value = {
@@ -189,6 +309,126 @@ def test_client_get_corporate_users(mocker):
         fields="id,email,firstName,isDeleted,lastName,mobile,name,occupation,status,userType,username",
     )
     assert "username" in result[0]
+
+
+def test_client_get_countries(mocker):
+    # Mock response
+    return_value = {
+        "total": 1,
+        "start": 0,
+        "count": 1,
+        "data": [
+            {
+                "id": 1234567891011,
+            },
+        ],
+    }
+    if not TEST_USE_ENV_CREDENTIALS:
+        mocker.patch(
+            "bullhorn.client.BullhornClient.request",
+            return_value=return_value,
+        )
+    # Initialise client
+    bc = BullhornClient(
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
+    )
+    # Get result
+    result = bc.get_countries(
+        where="id >= 0",
+        fields="id,code,name",
+    )
+    assert (len(result) == 0) or ("id" in result[0])
+
+
+def test_client_get_departments(mocker):
+    # Mock response
+    return_value = {
+        "total": 1,
+        "start": 0,
+        "count": 1,
+        "data": [
+            {
+                "id": 1234567891011,
+            },
+        ],
+    }
+    if not TEST_USE_ENV_CREDENTIALS:
+        mocker.patch(
+            "bullhorn.client.BullhornClient.request",
+            return_value=return_value,
+        )
+    # Initialise client
+    bc = BullhornClient(
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
+    )
+    # Get result
+    result = bc.get_departments(
+        where="id >= 0",
+        fields="id,name",
+    )
+    assert (len(result) == 0) or ("id" in result[0])
+
+
+def test_client_get_employee_pays(mocker):
+    # Mock response
+    return_value = {
+        "total": 1,
+        "start": 0,
+        "count": 1,
+        "data": [
+            {
+                "id": 1234567891011,
+            },
+        ],
+    }
+    if not TEST_USE_ENV_CREDENTIALS:
+        mocker.patch(
+            "bullhorn.client.BullhornClient.request",
+            return_value=return_value,
+        )
+    # Initialise client
+    bc = BullhornClient(
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
+    )
+    # Get result
+    result = bc.get_employee_pays(
+        where="id >= 0",
+        fields="id,amount,chargeDate,department,earnCodeName,hoursUnits,hoursWorked,jobCode,location,payCheck,projPhase,projWork,shift,unitRate,workCompID",
+    )
+    assert (len(result) == 0) or ("id" in result[0])
+
+
+def test_client_get_employer_contributions(mocker):
+    # Mock response
+    return_value = {
+        "total": 1,
+        "start": 0,
+        "count": 1,
+        "data": [
+            {
+                "id": 1234567891011,
+            },
+        ],
+    }
+    if not TEST_USE_ENV_CREDENTIALS:
+        mocker.patch(
+            "bullhorn.client.BullhornClient.request",
+            return_value=return_value,
+        )
+    # Initialise client
+    bc = BullhornClient(
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
+    )
+    # Get result
+    result = bc.get_employer_contributions(
+        where="id >= 0",
+        fields="id,amount,code,description,payCheck",
+    )
+    assert (len(result) == 0) or ("id" in result[0])
 
 
 def test_client_get_job_orders(mocker):
@@ -252,6 +492,186 @@ def test_client_get_job_submissions(mocker):
         fields="id,appointments,billRate,candidate,dateAdded,dateLastModified,endDate,isDeleted,jobOrder,latestAppointment,owners,payRate,salary,sendingUser,source,startDate,status",
     )
     assert "endDate" in result[0]
+
+
+def test_client_get_job_submission_histories(mocker):
+    # Mock response
+    return_value = {
+        "total": 1,
+        "start": 0,
+        "count": 1,
+        "data": [
+            {
+                "id": 1234567891011,
+            },
+        ],
+    }
+    if not TEST_USE_ENV_CREDENTIALS:
+        mocker.patch(
+            "bullhorn.client.BullhornClient.request",
+            return_value=return_value,
+        )
+    # Initialise client
+    bc = BullhornClient(
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
+    )
+    # Get result
+    result = bc.get_job_submission_histories(
+        where="id >= 0",
+        fields="id,dateAdded,jobSubmission,modifyingUser,status",
+    )
+    assert (len(result) == 0) or ("id" in result[0])
+
+
+def test_client_get_leads(mocker):
+    # Mock response
+    return_value = {
+        "total": 1,
+        "start": 0,
+        "count": 1,
+        "data": [
+            {
+                "id": 1234567891011,
+            },
+        ],
+    }
+    if not TEST_USE_ENV_CREDENTIALS:
+        mocker.patch(
+            "bullhorn.client.BullhornClient.request",
+            return_value=return_value,
+        )
+    # Initialise client
+    bc = BullhornClient(
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
+    )
+    # Get result
+    result = bc.get_leads(
+        where="id >= 0",
+        fields="id,assignedTo,businessSectors,campaignSource,candidates,category,clientContacts,clientCorporation,companyName,dateAdded,dateLastModified,email,firstName,isDeleted,lastName,leadSource,name,occupation,owner,role,salary,status,type",
+    )
+    assert (len(result) == 0) or ("id" in result[0])
+
+
+def test_client_get_lead_histories(mocker):
+    # Mock response
+    return_value = {
+        "total": 1,
+        "start": 0,
+        "count": 1,
+        "data": [
+            {
+                "id": 1234567891011,
+            },
+        ],
+    }
+    if not TEST_USE_ENV_CREDENTIALS:
+        mocker.patch(
+            "bullhorn.client.BullhornClient.request",
+            return_value=return_value,
+        )
+    # Initialise client
+    bc = BullhornClient(
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
+    )
+    # Get result
+    result = bc.get_lead_histories(
+        where="id >= 0",
+        fields="id,clientCorporation,dateAdded,lead,modifyingUser,status",
+    )
+    assert (len(result) == 0) or ("id" in result[0])
+
+
+def test_client_get_locations(mocker):
+    # Mock response
+    return_value = {
+        "total": 1,
+        "start": 0,
+        "count": 1,
+        "data": [
+            {
+                "id": 1234567891011,
+            },
+        ],
+    }
+    if not TEST_USE_ENV_CREDENTIALS:
+        mocker.patch(
+            "bullhorn.client.BullhornClient.request",
+            return_value=return_value,
+        )
+    # Initialise client
+    bc = BullhornClient(
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
+    )
+    # Get result
+    result = bc.get_locations(
+        where="id >= 0",
+        fields="dateAdded,dateLastModified,owner,status,title",
+    )
+    assert (len(result) == 0) or ("id" in result[0])
+
+
+def test_client_get_opportunities(mocker):
+    # Mock response
+    return_value = {
+        "total": 1,
+        "start": 0,
+        "count": 1,
+        "data": [
+            {
+                "id": 1234567891011,
+            },
+        ],
+    }
+    if not TEST_USE_ENV_CREDENTIALS:
+        mocker.patch(
+            "bullhorn.client.BullhornClient.request",
+            return_value=return_value,
+        )
+    # Initialise client
+    bc = BullhornClient(
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
+    )
+    # Get result
+    result = bc.get_opportunities(
+        where="id >= 0",
+        fields="id,assignedUsers,category,clientContact,clientCorporation,dateAdded,dateLastModified,dealValue,effectiveDate,estimatedDuration,estimatedEndDate,estimatedHoursPerWeek,estimatedStartDate,expectedCloseDate,expectedFee,expectedPayRate,isDeleted,isOpen,jobOrders,lead,owner,salary,source,title",
+    )
+    assert (len(result) == 0) or ("id" in result[0])
+
+
+def test_client_get_opportunity_histories(mocker):
+    # Mock response
+    return_value = {
+        "total": 1,
+        "start": 0,
+        "count": 1,
+        "data": [
+            {
+                "id": 1234567891011,
+            },
+        ],
+    }
+    if not TEST_USE_ENV_CREDENTIALS:
+        mocker.patch(
+            "bullhorn.client.BullhornClient.request",
+            return_value=return_value,
+        )
+    # Initialise client
+    bc = BullhornClient(
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
+    )
+    # Get result
+    result = bc.get_opportunity_histories(
+        where="id >= 0",
+        fields="id,dateAdded,dealValue,effectiveDate,modifyingUser,opportunity,status",
+    )
+    assert (len(result) == 0) or ("id" in result[0])
 
 
 def test_client_get_placements(mocker):
@@ -321,3 +741,33 @@ def test_client_get_placement_commissions(mocker):
         fields="id,commissionPercentage,dateAdded,dateLastModified,flatPayout,grossMarginPercentage,hourlyPayout,placement,role,status,user",
     )
     assert "commissionPercentage" in result[0]
+
+
+def test_client_get_sendouts(mocker):
+    # Mock response
+    return_value = {
+        "total": 1,
+        "start": 0,
+        "count": 1,
+        "data": [
+            {
+                "id": 1234567891011,
+            },
+        ],
+    }
+    if not TEST_USE_ENV_CREDENTIALS:
+        mocker.patch(
+            "bullhorn.client.BullhornClient.request",
+            return_value=return_value,
+        )
+    # Initialise client
+    bc = BullhornClient(
+        token=TEST_SESSION_TOKEN,
+        rest_url=TEST_REST_URL,
+    )
+    # Get result
+    result = bc.get_sendouts(
+        where="id >= 0",
+        fields="id,candidate,clientContact,clientCorporation,dateAdded,email,isRead,jobOrder,user",
+    )
+    assert (len(result) == 0) or ("id" in result[0])
