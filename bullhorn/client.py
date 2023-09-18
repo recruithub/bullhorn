@@ -159,7 +159,7 @@ class BullhornClient:
                 },
             )
         )
-        return request
+        return request["data"]
 
     def get_business_sectors(
         self,
@@ -176,7 +176,7 @@ class BullhornClient:
                 },
             )
         )
-        return request
+        return request["data"]
 
     def get_candidates(
         self,
@@ -210,7 +210,7 @@ class BullhornClient:
                 },
             )
         )
-        return request
+        return request["data"]
 
     def get_client_contacts(
         self,
