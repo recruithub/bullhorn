@@ -146,15 +146,15 @@ class BullhornClient:
 
     def get_appointments(
         self,
-        query: str,
+        where: str,
         fields: str,
     ) -> List[appointment.Appointment]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "search/Appointment?query={query}&fields={fields}",
+                self.rest_url + "query/Appointment?where={where}&fields={fields}",
                 path_params={
-                    "query": query,
+                    "where": where,
                     "fields": fields,
                 },
             )
@@ -163,15 +163,15 @@ class BullhornClient:
 
     def get_business_sectors(
         self,
-        query: str,
+        where: str,
         fields: str,
     ) -> List[business_sector.BusinessSector]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "search/BusinessSector?query={query}&fields={fields}",
+                self.rest_url + "query/BusinessSector?where={where}&fields={fields}",
                 path_params={
-                    "query": query,
+                    "where": where,
                     "fields": fields,
                 },
             )
@@ -197,15 +197,15 @@ class BullhornClient:
 
     def get_categories(
         self,
-        query: str,
+        where: str,
         fields: str,
     ) -> List[category.Category]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "search/Category?query={query}&fields={fields}",
+                self.rest_url + "query/Category?where={where}&fields={fields}",
                 path_params={
-                    "query": query,
+                    "where": where,
                     "fields": fields,
                 },
             )
@@ -214,15 +214,15 @@ class BullhornClient:
 
     def get_client_contacts(
         self,
-        query: str,
+        where: str,
         fields: str,
     ) -> List[client_contact.ClientContact]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "search/ClientContact?query={query}&fields={fields}",
+                self.rest_url + "query/ClientContact?where={where}&fields={fields}",
                 path_params={
-                    "query": query,
+                    "where": where,
                     "fields": fields,
                 },
             )
@@ -231,16 +231,15 @@ class BullhornClient:
 
     def get_client_corporations(
         self,
-        query: str,
+        where: str,
         fields: str,
     ) -> List[client_corporation.ClientCorporation]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url
-                + "search/ClientCorporation?query={query}&fields={fields}",
+                self.rest_url + "query/ClientCorporation?where={where}&fields={fields}",
                 path_params={
-                    "query": query,
+                    "where": where,
                     "fields": fields,
                 },
             )
@@ -249,16 +248,16 @@ class BullhornClient:
 
     def get_client_corporation_appointments(
         self,
-        query: str,
+        where: str,
         fields: str,
     ) -> List[client_corporation_appointment.ClientCorporationAppointment]:
         request = self.request(
             Route(
                 "GET",
                 self.rest_url
-                + "search/ClientCorporationAppointment?query={query}&fields={fields}",
+                + "query/ClientCorporationAppointment?where={where}&fields={fields}",
                 path_params={
-                    "query": query,
+                    "where": where,
                     "fields": fields,
                 },
             )
@@ -318,15 +317,15 @@ class BullhornClient:
 
     def get_employee_pays(
         self,
-        query: str,
+        where: str,
         fields: str,
     ) -> List[employee_pay.EmployeePay]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "search/EmployeePay?query={query}&fields={fields}",
+                self.rest_url + "query/EmployeePay?where={where}&fields={fields}",
                 path_params={
-                    "query": query,
+                    "where": where,
                     "fields": fields,
                 },
             )
@@ -335,16 +334,16 @@ class BullhornClient:
 
     def get_employer_contributions(
         self,
-        query: str,
+        where: str,
         fields: str,
     ) -> List[employer_contribution.EmployerContribution]:
         request = self.request(
             Route(
                 "GET",
                 self.rest_url
-                + "search/EmployerContribution?query={query}&fields={fields}",
+                + "query/EmployerContribution?where={where}&fields={fields}",
                 path_params={
-                    "query": query,
+                    "where": where,
                     "fields": fields,
                 },
             )
@@ -353,15 +352,15 @@ class BullhornClient:
 
     def get_job_orders(
         self,
-        query: str,
+        where: str,
         fields: str,
     ) -> List[job_order.JobOrder]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "search/JobOrder?query={query}&fields={fields}",
+                self.rest_url + "query/JobOrder?where={where}&fields={fields}",
                 path_params={
-                    "query": query,
+                    "where": where,
                     "fields": fields,
                 },
             )
@@ -370,15 +369,15 @@ class BullhornClient:
 
     def get_job_submissions(
         self,
-        query: str,
+        where: str,
         fields: str,
     ) -> List[job_submission.JobSubmission]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "search/JobSubmission?query={query}&fields={fields}",
+                self.rest_url + "query/JobSubmission?where={where}&fields={fields}",
                 path_params={
-                    "query": query,
+                    "where": where,
                     "fields": fields,
                 },
             )
@@ -387,16 +386,16 @@ class BullhornClient:
 
     def get_job_submission_histories(
         self,
-        query: str,
+        where: str,
         fields: str,
     ) -> List[job_submission_history.JobSubmissionHistory]:
         request = self.request(
             Route(
                 "GET",
                 self.rest_url
-                + "search/JobSubmissionHistory?query={query}&fields={fields}",
+                + "query/JobSubmissionHistory?where={where}&fields={fields}",
                 path_params={
-                    "query": query,
+                    "where": where,
                     "fields": fields,
                 },
             )
@@ -405,15 +404,15 @@ class BullhornClient:
 
     def get_leads(
         self,
-        query: str,
+        where: str,
         fields: str,
     ) -> List[lead.Lead]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "search/Lead?query={query}&fields={fields}",
+                self.rest_url + "query/Lead?where={where}&fields={fields}",
                 path_params={
-                    "query": query,
+                    "where": where,
                     "fields": fields,
                 },
             )
@@ -422,15 +421,15 @@ class BullhornClient:
 
     def get_lead_histories(
         self,
-        query: str,
+        where: str,
         fields: str,
     ) -> List[lead_history.LeadHistory]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "search/LeadHistory?query={query}&fields={fields}",
+                self.rest_url + "query/LeadHistory?where={where}&fields={fields}",
                 path_params={
-                    "query": query,
+                    "where": where,
                     "fields": fields,
                 },
             )
@@ -439,15 +438,15 @@ class BullhornClient:
 
     def get_locations(
         self,
-        query: str,
+        where: str,
         fields: str,
     ) -> List[location.Location]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "search/Location?query={query}&fields={fields}",
+                self.rest_url + "query/Location?where={where}&fields={fields}",
                 path_params={
-                    "query": query,
+                    "where": where,
                     "fields": fields,
                 },
             )
@@ -456,15 +455,15 @@ class BullhornClient:
 
     def get_opportunities(
         self,
-        query: str,
+        where: str,
         fields: str,
     ) -> List[opportunity.Opportunity]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "search/Opportunity?query={query}&fields={fields}",
+                self.rest_url + "query/Opportunity?where={where}&fields={fields}",
                 path_params={
-                    "query": query,
+                    "where": where,
                     "fields": fields,
                 },
             )
@@ -473,16 +472,16 @@ class BullhornClient:
 
     def get_opportunity_histories(
         self,
-        query: str,
+        where: str,
         fields: str,
     ) -> List[opportunity_history.OpportunityHistory]:
         request = self.request(
             Route(
                 "GET",
                 self.rest_url
-                + "search/OpportunityHistory?query={query}&fields={fields}",
+                + "query/OpportunityHistory?where={where}&fields={fields}",
                 path_params={
-                    "query": query,
+                    "where": where,
                     "fields": fields,
                 },
             )
@@ -491,15 +490,15 @@ class BullhornClient:
 
     def get_placements(
         self,
-        query: str,
+        where: str,
         fields: str,
     ) -> List[placement.Placement]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "search/Placement?query={query}&fields={fields}",
+                self.rest_url + "query/Placement?where={where}&fields={fields}",
                 path_params={
-                    "query": query,
+                    "where": where,
                     "fields": fields,
                 },
             )
@@ -526,15 +525,15 @@ class BullhornClient:
 
     def get_sendouts(
         self,
-        query: str,
+        where: str,
         fields: str,
     ) -> List[sendout.Sendout]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "search/Sendout?query={query}&fields={fields}",
+                self.rest_url + "query/Sendout?where={where}&fields={fields}",
                 path_params={
-                    "query": query,
+                    "where": where,
                     "fields": fields,
                 },
             )
