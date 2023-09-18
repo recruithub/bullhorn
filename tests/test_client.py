@@ -201,13 +201,6 @@ def test_client_get_job_orders(mocker):
             {
                 "id": 1234567891011,
                 "description": "An example open job to be filled.",
-                "owner": {
-                    "id": 1234567891011,
-                    "firstName": "Example",
-                    "middleName": "C.",
-                    "lastName": "Name",
-                    "username": "ExampleCName",
-                },
             },
         ],
     }
@@ -226,7 +219,7 @@ def test_client_get_job_orders(mocker):
         where="id >= 0",
         fields="id,appointments,approvedPlacements,assignedUsers,billRateCategoryID,billingProfile,bonusPackage,branch,businessSectors,categories,clientBillRate,clientContact,clientCorporation,dateAdded,dateClosed,dateEnd,dateLastModified,description,durationWeeks,employmentType,feeArrangement,interviews,isDeleted,isOpen,isPublic,jobCode,numOpenings,opportunity,owner,payRate,placements,reasonClosed,salary,salaryUnit,source,startDate,status,submissions,title,usersAssigned",
     )
-    assert "owner" in result[0]
+    assert "description" in result[0]
 
 
 def test_client_get_job_submissions(mocker):
@@ -239,15 +232,6 @@ def test_client_get_job_submissions(mocker):
             {
                 "id": 1234567891011,
                 "endDate": 1234567891011,
-                "owners": [
-                    {
-                        "id": 1234567891011,
-                        "firstName": "Example",
-                        "middleName": "C.",
-                        "lastName": "Name",
-                        "username": "ExampleCName",
-                    },
-                ],
                 "startDate": 1234567891012,
             },
         ],
@@ -267,7 +251,7 @@ def test_client_get_job_submissions(mocker):
         where="id >= 0",
         fields="id,appointments,billRate,candidate,dateAdded,dateLastModified,endDate,isDeleted,jobOrder,latestAppointment,owners,payRate,salary,sendingUser,source,startDate,status",
     )
-    assert "owners" in result[0]
+    assert "endDate" in result[0]
 
 
 def test_client_get_placements(mocker):
