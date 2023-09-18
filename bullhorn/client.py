@@ -105,8 +105,8 @@ class BullhornClient:
                 if 300 > response.status_code >= 200:
                     logger.debug(f"{method} {url} has received {data}")
                     return data
-                # Server error, so retry request with exponential back-off
-                if response.status_code in {500, 502, 503, 504, 524}:
+                # Server error or too many requests, so retry request with exponential back-off
+                if response.status_code in {429, 500, 502, 503, 504, 524}:
                     time.sleep(1 + tries * 2)
                     continue
                 # Client error, so raise exception
