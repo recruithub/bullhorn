@@ -182,18 +182,36 @@ class BullhornClient:
         self,
         query: str,
         fields: str,
+        count: int = 10,
     ) -> List[candidate.Candidate]:
-        request = self.request(
-            Route(
-                "GET",
-                self.rest_url + "search/Candidate?query={query}&fields={fields}",
-                path_params={
-                    "query": query,
-                    "fields": fields,
-                },
+        # Initialise pagination cursor
+        start = 0
+        last = False
+        # Iteratively get data
+        data = []
+        while not last:
+            # Fetch current page
+            request = self.request(
+                Route(
+                    "GET",
+                    self.rest_url + "query/Candidate?query={query}&fields={fields}",
+                    path_params={
+                        "query": query,
+                        "fields": fields,
+                        "start": start,
+                        "count": count,
+                    },
+                )
             )
-        )
-        return request["data"]
+            data.extend(request["data"])
+            # Handle end of pagination
+            total = request["total"]
+            if start + count >= total:
+                last = True
+            start += count
+            print(request["data"])
+        # Return all data
+        return data
 
     def get_categories(
         self,
