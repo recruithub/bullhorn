@@ -1,5 +1,7 @@
 from typing import Any, Dict, List, Optional, Tuple, Union
 
+import requests
+
 
 class BullhornException(Exception):
     """Base exception class for the Bullhorn REST API wrapper library.
@@ -18,7 +20,7 @@ class HTTPException(BullhornException):
 
     def __init__(
         self,
-        response,
+        response: requests.Response,
         message: Optional[Union[str, Dict[str, Any]]] = None,
     ):
         """
