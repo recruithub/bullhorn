@@ -75,8 +75,6 @@ class BullhornClient:
         self,
         route: Route,
         json: Optional[Dict] = None,
-        files=None,
-        form=None,
     ) -> Any:
         # Get attributes from route
         method = route.method
