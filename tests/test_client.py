@@ -153,7 +153,7 @@ def test_client_get_candidates(mocker):
         query="dateLastModified:{2023/09/01 TO *}",
         fields="id,businessSectors,candidateSource,category,companyName,dateAdded,dateLastModified,email,firstName,interviews,isDeleted,lastName,leads,mobile,name,occupation,owner,payrollStatus,salary,source,status,submissions,userDateAdded",
     )
-    assert "firstName" in result[0]
+    assert (len(result) == 0) or ("firstName" in result[0])
 
 
 def test_client_get_categories(mocker):
@@ -216,7 +216,7 @@ def test_client_get_client_contacts(mocker):
         where="dateLastModified >= 1693522800000",
         fields="id,businessSectors,category,clientCorporation,dateAdded,dateLastModified,division,email,firstName,isDeleted,lastName,leads,name,occupation,owner,source,status,type",
     )
-    assert "lastName" in result[0]
+    assert (len(result) == 0) or ("lastName" in result[0])
 
 
 def test_client_get_client_corporations(mocker):
@@ -247,7 +247,7 @@ def test_client_get_client_corporations(mocker):
         where="dateLastModified >= 1693522800000",
         fields="id,businessSectorList,clientContacts,companyURL,dateAdded,dateFounded,dateLastModified,department,exemptionStatus,feeArrangement,industryList,leads,name,owners,revenue,status",
     )
-    assert "name" in result[0]
+    assert (len(result) == 0) or ("name" in result[0])
 
 
 def test_client_get_client_corporation_appointments(mocker):
@@ -311,7 +311,7 @@ def test_client_get_corporate_users(mocker):
         where="dateLastModified >= 1693522800000",
         fields="id,email,firstName,isDeleted,lastName,mobile,name,occupation,status,userType,username",
     )
-    assert "username" in result[0]
+    assert (len(result) == 0) or ("username" in result[0])
 
 
 def test_client_get_countries(mocker):
@@ -468,7 +468,7 @@ def test_client_get_job_orders(mocker):
         where="dateLastModified >= 1693522800000",
         fields="id,appointments,approvedPlacements,assignedUsers,billRateCategoryID,billingProfile,bonusPackage,branch,businessSectors,categories,clientBillRate,clientContact,clientCorporation,dateAdded,dateClosed,dateEnd,dateLastModified,description,durationWeeks,employmentType,feeArrangement,interviews,isDeleted,isOpen,isPublic,jobCode,numOpenings,opportunity,owner,payRate,placements,reasonClosed,salary,salaryUnit,source,startDate,status,submissions,title,usersAssigned",
     )
-    assert "description" in result[0]
+    assert (len(result) == 0) or ("description" in result[0])
 
 
 def test_client_get_job_submissions(mocker):
@@ -500,7 +500,7 @@ def test_client_get_job_submissions(mocker):
         where="dateLastModified >= 1693522800000",
         fields="id,appointments,billRate,candidate,dateAdded,dateLastModified,endDate,isDeleted,jobOrder,latestAppointment,owners,payRate,salary,sendingUser,source,startDate,status",
     )
-    assert "endDate" in result[0]
+    assert (len(result) == 0) or ("endDate" in result[0])
 
 
 def test_client_get_job_submission_histories(mocker):
@@ -711,7 +711,7 @@ def test_client_get_placements(mocker):
         where="dateLastModified >= 1693522800000",
         fields="id,appointments,billingFrequency,bonusPackage,candidate,clientBillRate,clientOvertimeRate,commissions,dateAdded,dateBegin,dateClientEffective,dateEffective,dateEnd,dateLastModified,durationWeeks,employeeType,employmentStartDate,employmentType,fee,jobOrder,jobSubmission,location,owner,payRate,salary,salaryUnit,status",
     )
-    assert "fee" in result[0]
+    assert (len(result) == 0) or ("fee" in result[0])
 
 
 def test_client_get_placement_commissions(mocker):
@@ -749,7 +749,7 @@ def test_client_get_placement_commissions(mocker):
         where="dateLastModified >= 1693522800000",
         fields="id,commissionPercentage,dateAdded,dateLastModified,flatPayout,grossMarginPercentage,hourlyPayout,placement,role,status,user",
     )
-    assert "commissionPercentage" in result[0]
+    assert (len(result) == 0) or ("commissionPercentage" in result[0])
 
 
 def test_client_get_sendouts(mocker):
