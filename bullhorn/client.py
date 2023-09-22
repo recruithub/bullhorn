@@ -210,10 +210,12 @@ class BullhornClient:
             request = self.request(
                 Route(
                     "GET",
-                    self.rest_url + "query/Candidate?query={query}&fields={fields}",
+                    self.rest_url
+                    + "search/Candidate?query={query}&fields={fields}&orderBy={order_by}&count={count}&start={start}",
                     path_params={
                         "query": query,
                         "fields": fields,
+                        "order_by": order_by,
                         "start": start,
                         "count": count,
                     },
