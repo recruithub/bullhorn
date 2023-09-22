@@ -87,8 +87,8 @@ def test_client_get_appointments(mocker):
     )
     # Get result
     result = bc.get_appointments(
-        where="id >= 0",
-        fields="id,candidateReference,clientContactReference,communicationMethod,dateAdded,dateBegin,isDeleted,jobOrder,lead,opportunity,owner,placement,type",
+        where="dateLastModified >= 1693522800000",
+        fields="id,candidateReference,clientContactReference,communicationMethod,dateAdded,dateBegin,dateLastModified,isDeleted,jobOrder,lead,opportunity,owner,placement,type",
     )
     assert (len(result) == 0) or ("id" in result[0])
 
@@ -117,7 +117,7 @@ def test_client_get_business_sectors(mocker):
     )
     # Get result
     result = bc.get_business_sectors(
-        where="id >= 0",
+        where="dateAdded >= 1693522800000",
         fields="id,dateAdded,name",
     )
     assert (len(result) == 0) or ("id" in result[0])
@@ -150,8 +150,8 @@ def test_client_get_candidates(mocker):
     )
     # Get result
     result = bc.get_candidates(
-        query="dateLastModified:{1970/01/01 TO *}",
-        fields="id,businessSectors,candidateSource,category,companyName,dateAdded,email,firstName,interviews,isDeleted,lastName,leads,mobile,name,occupation,owner,payrollStatus,salary,source,status,submissions,userDateAdded",
+        query="dateLastModified:{2023/09/01 TO *}",
+        fields="id,businessSectors,candidateSource,category,companyName,dateAdded,dateLastModified,email,firstName,interviews,isDeleted,lastName,leads,mobile,name,occupation,owner,payrollStatus,salary,source,status,submissions,userDateAdded",
     )
     assert "firstName" in result[0]
 
@@ -180,7 +180,7 @@ def test_client_get_categories(mocker):
     )
     # Get result
     result = bc.get_categories(
-        where="id >= 0",
+        where="dateAdded >= 1693522800000",
         fields="id,dateAdded,name,occupation,type",
     )
     assert (len(result) == 0) or ("id" in result[0])
@@ -213,7 +213,7 @@ def test_client_get_client_contacts(mocker):
     )
     # Get result
     result = bc.get_client_contacts(
-        where="id >= 0",
+        where="dateLastModified >= 1693522800000",
         fields="id,businessSectors,category,clientCorporation,dateAdded,dateLastModified,division,email,firstName,isDeleted,lastName,leads,name,occupation,owner,source,status,type",
     )
     assert "lastName" in result[0]
@@ -244,7 +244,7 @@ def test_client_get_client_corporations(mocker):
     )
     # Get result
     result = bc.get_client_corporations(
-        where="id >= 0",
+        where="dateLastModified >= 1693522800000",
         fields="id,businessSectorList,clientContacts,companyURL,dateAdded,dateFounded,dateLastModified,department,exemptionStatus,feeArrangement,industryList,leads,name,owners,revenue,status",
     )
     assert "name" in result[0]
@@ -274,7 +274,7 @@ def test_client_get_client_corporation_appointments(mocker):
     )
     # Get result
     result = bc.get_client_corporation_appointments(
-        where="id >= 0",
+        where="id >= 1",
         fields="id,clientCorporation,clientContact,appointment",
     )
     assert (len(result) == 0) or ("id" in result[0])
@@ -308,7 +308,7 @@ def test_client_get_corporate_users(mocker):
     )
     # Get result
     result = bc.get_corporate_users(
-        where="id >= 0",
+        where="dateLastModified >= 1693522800000",
         fields="id,email,firstName,isDeleted,lastName,mobile,name,occupation,status,userType,username",
     )
     assert "username" in result[0]
@@ -338,7 +338,7 @@ def test_client_get_countries(mocker):
     )
     # Get result
     result = bc.get_countries(
-        where="id >= 0",
+        where="id >= 1",
         fields="id,code,name",
     )
     assert (len(result) == 0) or ("id" in result[0])
@@ -368,7 +368,7 @@ def test_client_get_departments(mocker):
     )
     # Get result
     result = bc.get_departments(
-        where="id >= 0",
+        where="id >= 1",
         fields="id,name",
     )
     assert (len(result) == 0) or ("id" in result[0])
@@ -465,7 +465,7 @@ def test_client_get_job_orders(mocker):
     )
     # Get result
     result = bc.get_job_orders(
-        where="id >= 0",
+        where="dateLastModified >= 1693522800000",
         fields="id,appointments,approvedPlacements,assignedUsers,billRateCategoryID,billingProfile,bonusPackage,branch,businessSectors,categories,clientBillRate,clientContact,clientCorporation,dateAdded,dateClosed,dateEnd,dateLastModified,description,durationWeeks,employmentType,feeArrangement,interviews,isDeleted,isOpen,isPublic,jobCode,numOpenings,opportunity,owner,payRate,placements,reasonClosed,salary,salaryUnit,source,startDate,status,submissions,title,usersAssigned",
     )
     assert "description" in result[0]
@@ -497,7 +497,7 @@ def test_client_get_job_submissions(mocker):
     )
     # Get result
     result = bc.get_job_submissions(
-        where="id >= 0",
+        where="dateLastModified >= 1693522800000",
         fields="id,appointments,billRate,candidate,dateAdded,dateLastModified,endDate,isDeleted,jobOrder,latestAppointment,owners,payRate,salary,sendingUser,source,startDate,status",
     )
     assert "endDate" in result[0]
@@ -527,7 +527,7 @@ def test_client_get_job_submission_histories(mocker):
     )
     # Get result
     result = bc.get_job_submission_histories(
-        where="id >= 0",
+        where="dateAdded >= 1693522800000",
         fields="id,dateAdded,jobSubmission,modifyingUser,status",
     )
     assert (len(result) == 0) or ("id" in result[0])
@@ -557,7 +557,7 @@ def test_client_get_leads(mocker):
     )
     # Get result
     result = bc.get_leads(
-        where="id >= 0",
+        where="dateLastModified >= 1693522800000",
         fields="id,assignedTo,businessSectors,campaignSource,candidates,category,clientContacts,clientCorporation,companyName,dateAdded,dateLastModified,email,firstName,isDeleted,lastName,leadSource,name,occupation,owner,role,salary,status,type",
     )
     assert (len(result) == 0) or ("id" in result[0])
@@ -587,7 +587,7 @@ def test_client_get_lead_histories(mocker):
     )
     # Get result
     result = bc.get_lead_histories(
-        where="id >= 0",
+        where="dateAdded >= 1693522800000",
         fields="id,clientCorporation,dateAdded,lead,modifyingUser,status",
     )
     assert (len(result) == 0) or ("id" in result[0])
@@ -617,7 +617,7 @@ def test_client_get_locations(mocker):
     )
     # Get result
     result = bc.get_locations(
-        where="id >= 0",
+        where="dateLastModified >= 1693522800000",
         fields="dateAdded,dateLastModified,owner,status,title",
     )
     assert (len(result) == 0) or ("id" in result[0])
@@ -647,7 +647,7 @@ def test_client_get_opportunities(mocker):
     )
     # Get result
     result = bc.get_opportunities(
-        where="id >= 0",
+        where="dateLastModified >= 1693522800000",
         fields="id,assignedUsers,category,clientContact,clientCorporation,dateAdded,dateLastModified,dealValue,effectiveDate,estimatedDuration,estimatedEndDate,estimatedHoursPerWeek,estimatedStartDate,expectedCloseDate,expectedFee,expectedPayRate,isDeleted,isOpen,jobOrders,lead,owner,salary,source,title",
     )
     assert (len(result) == 0) or ("id" in result[0])
@@ -677,7 +677,7 @@ def test_client_get_opportunity_histories(mocker):
     )
     # Get result
     result = bc.get_opportunity_histories(
-        where="id >= 0",
+        where="dateAdded >= 1693522800000",
         fields="id,dateAdded,dealValue,effectiveDate,modifyingUser,opportunity,status",
     )
     assert (len(result) == 0) or ("id" in result[0])
@@ -708,7 +708,7 @@ def test_client_get_placements(mocker):
     )
     # Get result
     result = bc.get_placements(
-        where="id >= 0",
+        where="dateLastModified >= 1693522800000",
         fields="id,appointments,billingFrequency,bonusPackage,candidate,clientBillRate,clientOvertimeRate,commissions,dateAdded,dateBegin,dateClientEffective,dateEffective,dateEnd,dateLastModified,durationWeeks,employeeType,employmentStartDate,employmentType,fee,jobOrder,jobSubmission,location,owner,payRate,salary,salaryUnit,status",
     )
     assert "fee" in result[0]
@@ -746,7 +746,7 @@ def test_client_get_placement_commissions(mocker):
     )
     # Get result
     result = bc.get_placement_commissions(
-        where="id >= 0",
+        where="dateLastModified >= 1693522800000",
         fields="id,commissionPercentage,dateAdded,dateLastModified,flatPayout,grossMarginPercentage,hourlyPayout,placement,role,status,user",
     )
     assert "commissionPercentage" in result[0]
@@ -776,7 +776,7 @@ def test_client_get_sendouts(mocker):
     )
     # Get result
     result = bc.get_sendouts(
-        where="id >= 0",
+        where="dateAdded >= 1693522800000",
         fields="id,candidate,clientContact,clientCorporation,dateAdded,email,isRead,jobOrder,user",
     )
     assert (len(result) == 0) or ("id" in result[0])
