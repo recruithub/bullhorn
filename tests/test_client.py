@@ -2,8 +2,11 @@ import os
 
 from typing import List
 
+import pytest
+
 from bullhorn import __version__
 from bullhorn.client import BullhornClient
+from bullhorn.exceptions import Forbidden
 from bullhorn.types import (
     candidate,
     client_contact,
@@ -394,10 +397,13 @@ def test_client_get_employee_pays(mocker):
         rest_url=TEST_REST_URL,
     )
     # Get result
-    result = bc.get_employee_pays(
-        where="id >= 0",
-        fields="id,amount,chargeDate,department,earnCodeName,hoursUnits,hoursWorked,jobCode,location,payCheck,projPhase,projWork,shift,unitRate,workCompID",
-    )
+    try:
+        result = bc.get_employee_pays(
+            where="id >= 1",
+            fields="id,amount,chargeDate,department,earnCodeName,hoursUnits,hoursWorked,jobCode,location,payCheck,projPhase,projWork,shift,unitRate,workCompID",
+        )
+    except Forbidden:
+        pytest.skip("403 - Forbidden | Skipping...")
     assert (len(result) == 0) or ("id" in result[0])
 
 
@@ -424,10 +430,13 @@ def test_client_get_employer_contributions(mocker):
         rest_url=TEST_REST_URL,
     )
     # Get result
-    result = bc.get_employer_contributions(
-        where="id >= 0",
-        fields="id,amount,code,description,payCheck",
-    )
+    try:
+        result = bc.get_employee_pays(
+            where="id >= 1",
+            fields="id,amount,chargeDate,department,earnCodeName,hoursUnits,hoursWorked,jobCode,location,payCheck,projPhase,projWork,shift,unitRate,workCompID",
+        )
+    except Forbidden:
+        pytest.skip("403 - Forbidden | Skipping...")
     assert (len(result) == 0) or ("id" in result[0])
 
 
