@@ -54,12 +54,16 @@ class BullhornClient:
         self,
     ) -> str:
         """
-        Get the user agent string for the HTTP client.
+        Generates a user agent string for the HTTP client. The user agent string is composed of information regarding
+        the wrapper library, Python version, and requests library version being used.
 
         Returns:
-            str:
-                The user agent string combining information about the Python wrapper,
-                its version, the Python interpreter version, and the aiohttp version.
+        - str: The generated user agent string.
+
+        Example usage:
+        >>> user_agent_str = api_instance._get_user_agent()
+        >>> print(user_agent_str)
+        Python wrapper for Bullhorn API (https://github.com/recruithub/bullhorn 1.0.0) Python/3.8.10 requests/2.25.1
         """
         version_info = sys.version_info
         user_agent_strings = [
@@ -76,6 +80,28 @@ class BullhornClient:
         route: Route,
         json: Optional[Dict] = None,
     ) -> Any:
+        """
+        Sends an HTTP request to a specified route and handles the response. Retries the request in case of certain
+        server errors or rate-limiting issues, with exponential back-off. Raises exceptions for client or unexpected
+        server errors.
+
+        Parameters:
+        - route (Route): An object containing the method and URL for the HTTP request.
+        - json (Optional[Dict], optional): A dictionary containing the JSON payload to be sent with the request.
+          Defaults to None.
+
+        Returns:
+        - Any: The JSON response data if the request is successful.
+
+        Raises:
+        - Forbidden: If the request is forbidden (HTTP status 403).
+        - NotFound: If the requested resource is not found (HTTP status 404).
+        - BullhornServerError: If there's a server error (HTTP status 500 or above, except for specific retriable
+          errors).
+        - HTTPException: For other HTTP errors.
+        - OSError: For connection-related errors.
+        - RuntimeError: If an unexpected state occurs, indicating a bug in the code.
+        """
         # Get attributes from route
         method = route.method
         url = route.url
@@ -133,7 +159,17 @@ class BullhornClient:
     def ping(
         self,
     ) -> ping.Ping:
-        """Ping used to test whether the client’s session is valid."""
+        """
+        Sends a GET request to the API's ping endpoint to retrieve the expiration date of the calling client's session.
+        This method can be used to test whether the client's session is valid.
+
+        Returns:
+        - ping.Ping: An object containing the date of the session expiration if the session is valid.
+
+        Raises:
+        - Unauthorized: If the client's session is not valid (assuming `Unauthorized` exception is defined to handle
+          such cases).
+        """
         request = self.request(
             Route(
                 "GET",
@@ -150,6 +186,21 @@ class BullhornClient:
         count: int = 10,
         start: int = 0,
     ) -> List[appointment.Appointment]:
+        """
+        Sends a GET request to the REST API to retrieve a list of appointments based on specified parameters.
+
+        Parameters:
+        - where (str): A string specifying the filter conditions for querying the appointments.
+        - fields (str): A string specifying which fields to include in the returned records.
+        - order_by (str, optional): A string specifying the order in which to return the appointments.
+          Defaults to an empty string, which means the order is unspecified.
+        - count (int, optional): The maximum number of appointments to return. Defaults to 10.
+        - start (int, optional): The position in the query result to start returning appointments.
+          Defaults to 0.
+
+        Returns:
+        - List[Appointment]: A list of appointments matching the query parameters.
+        """
         request = self.request(
             Route(
                 "GET",
@@ -174,6 +225,21 @@ class BullhornClient:
         count: int = 10,
         start: int = 0,
     ) -> List[business_sector.BusinessSector]:
+        """
+        Sends a GET request to the REST API to retrieve a list of business sectors based on specified parameters.
+
+        Parameters:
+        - where (str): A string specifying the filter conditions for querying the business sectors.
+        - fields (str): A string specifying which fields to include in the returned records.
+        - order_by (str, optional): A string specifying the order in which to return the business sectors.
+          Defaults to an empty string, which means the order is unspecified.
+        - count (int, optional): The maximum number of business sectors to return. Defaults to 10.
+        - start (int, optional): The position in the query result to start returning business sectors.
+          Defaults to 0.
+
+        Returns:
+        - List[BusinessSector]: A list of business sectors matching the query parameters.
+        """
         request = self.request(
             Route(
                 "GET",
@@ -198,6 +264,21 @@ class BullhornClient:
         count: int = 10,
         start: int = 0,
     ) -> List[candidate.Candidate]:
+        """
+        Sends a GET request to the REST API to retrieve a list of candidates based on specified parameters.
+
+        Parameters:
+        - where (str): A string specifying the filter conditions for querying the candidates.
+        - fields (str): A string specifying which fields to include in the returned records.
+        - order_by (str, optional): A string specifying the order in which to return the candidates.
+          Defaults to an empty string, which means the order is unspecified.
+        - count (int, optional): The maximum number of candidates to return. Defaults to 10.
+        - start (int, optional): The position in the query result to start returning candidates.
+          Defaults to 0.
+
+        Returns:
+        - List[Candidate]: A list of candidates matching the query parameters.
+        """
         # Initialise pagination cursor
         start = 0
         last = False
@@ -236,6 +317,21 @@ class BullhornClient:
         count: int = 10,
         start: int = 0,
     ) -> List[category.Category]:
+        """
+        Sends a GET request to the REST API to retrieve a list of categories based on specified parameters.
+
+        Parameters:
+        - where (str): A string specifying the filter conditions for querying the categories.
+        - fields (str): A string specifying which fields to include in the returned records.
+        - order_by (str, optional): A string specifying the order in which to return the categories.
+          Defaults to an empty string, which means the order is unspecified.
+        - count (int, optional): The maximum number of categories to return. Defaults to 10.
+        - start (int, optional): The position in the query result to start returning categories.
+          Defaults to 0.
+
+        Returns:
+        - List[Category]: A list of categories matching the query parameters.
+        """
         request = self.request(
             Route(
                 "GET",
@@ -260,6 +356,21 @@ class BullhornClient:
         count: int = 10,
         start: int = 0,
     ) -> List[client_contact.ClientContact]:
+        """
+        Sends a GET request to the REST API to retrieve a list of client contacts based on specified parameters.
+
+        Parameters:
+        - where (str): A string specifying the filter conditions for querying the client contacts.
+        - fields (str): A string specifying which fields to include in the returned records.
+        - order_by (str, optional): A string specifying the order in which to return the client contacts.
+          Defaults to an empty string, which means the order is unspecified.
+        - count (int, optional): The maximum number of client contacts to return. Defaults to 10.
+        - start (int, optional): The position in the query result to start returning client contacts.
+          Defaults to 0.
+
+        Returns:
+        - List[ClientContact]: A list of client contacts matching the query parameters.
+        """
         request = self.request(
             Route(
                 "GET",
@@ -284,6 +395,21 @@ class BullhornClient:
         count: int = 10,
         start: int = 0,
     ) -> List[client_corporation.ClientCorporation]:
+        """
+        Sends a GET request to the REST API to retrieve a list of client corporations based on specified parameters.
+
+        Parameters:
+        - where (str): A string specifying the filter conditions for querying the client corporations.
+        - fields (str): A string specifying which fields to include in the returned records.
+        - order_by (str, optional): A string specifying the order in which to return the client corporations.
+          Defaults to an empty string, which means the order is unspecified.
+        - count (int, optional): The maximum number of client corporations to return. Defaults to 10.
+        - start (int, optional): The position in the query result to start returning client corporations.
+          Defaults to 0.
+
+        Returns:
+        - List[ClientCorporation]: A list of client corporations matching the query parameters.
+        """
         request = self.request(
             Route(
                 "GET",
@@ -308,6 +434,21 @@ class BullhornClient:
         count: int = 10,
         start: int = 0,
     ) -> List[client_corporation_appointment.ClientCorporationAppointment]:
+        """
+        Sends a GET request to the REST API to retrieve a list of client_corporation_appointments based on specified parameters.
+
+        Parameters:
+        - where (str): A string specifying the filter conditions for querying the client_corporation_appointments.
+        - fields (str): A string specifying which fields to include in the returned records.
+        - order_by (str, optional): A string specifying the order in which to return the client_corporation_appointments.
+          Defaults to an empty string, which means the order is unspecified.
+        - count (int, optional): The maximum number of client_corporation_appointments to return. Defaults to 10.
+        - start (int, optional): The position in the query result to start returning client_corporation_appointments.
+          Defaults to 0.
+
+        Returns:
+        - List[ClientCorporationAppointment]: A list of client_corporation_appointments matching the query parameters.
+        """
         request = self.request(
             Route(
                 "GET",
@@ -332,6 +473,21 @@ class BullhornClient:
         count: int = 10,
         start: int = 0,
     ) -> List[corporate_user.CorporateUser]:
+        """
+        Sends a GET request to the REST API to retrieve a list of corporate users based on specified parameters.
+
+        Parameters:
+        - where (str): A string specifying the filter conditions for querying the corporate users.
+        - fields (str): A string specifying which fields to include in the returned records.
+        - order_by (str, optional): A string specifying the order in which to return the corporate users.
+          Defaults to an empty string, which means the order is unspecified.
+        - count (int, optional): The maximum number of corporate users to return. Defaults to 10.
+        - start (int, optional): The position in the query result to start returning corporate users.
+          Defaults to 0.
+
+        Returns:
+        - List[CorporateUser]: A list of corporate users matching the query parameters.
+        """
         request = self.request(
             Route(
                 "GET",
@@ -356,6 +512,21 @@ class BullhornClient:
         count: int = 10,
         start: int = 0,
     ) -> List[country.Country]:
+        """
+        Sends a GET request to the REST API to retrieve a list of countries based on specified parameters.
+
+        Parameters:
+        - where (str): A string specifying the filter conditions for querying the countries.
+        - fields (str): A string specifying which fields to include in the returned records.
+        - order_by (str, optional): A string specifying the order in which to return the countries.
+          Defaults to an empty string, which means the order is unspecified.
+        - count (int, optional): The maximum number of countries to return. Defaults to 10.
+        - start (int, optional): The position in the query result to start returning countries.
+          Defaults to 0.
+
+        Returns:
+        - List[Country]: A list of countries matching the query parameters.
+        """
         request = self.request(
             Route(
                 "GET",
@@ -380,6 +551,21 @@ class BullhornClient:
         count: int = 10,
         start: int = 0,
     ) -> List[department.Department]:
+        """
+        Sends a GET request to the REST API to retrieve a list of departments based on specified parameters.
+
+        Parameters:
+        - where (str): A string specifying the filter conditions for querying the departments.
+        - fields (str): A string specifying which fields to include in the returned records.
+        - order_by (str, optional): A string specifying the order in which to return the departments.
+          Defaults to an empty string, which means the order is unspecified.
+        - count (int, optional): The maximum number of departments to return. Defaults to 10.
+        - start (int, optional): The position in the query result to start returning departments.
+          Defaults to 0.
+
+        Returns:
+        - List[Department]: A list of departments matching the query parameters.
+        """
         request = self.request(
             Route(
                 "GET",
@@ -404,6 +590,21 @@ class BullhornClient:
         count: int = 10,
         start: int = 0,
     ) -> List[employee_pay.EmployeePay]:
+        """
+        Sends a GET request to the REST API to retrieve a list of employee pays based on specified parameters.
+
+        Parameters:
+        - where (str): A string specifying the filter conditions for querying the employee pays.
+        - fields (str): A string specifying which fields to include in the returned records.
+        - order_by (str, optional): A string specifying the order in which to return the employee pays.
+          Defaults to an empty string, which means the order is unspecified.
+        - count (int, optional): The maximum number of employee pays to return. Defaults to 10.
+        - start (int, optional): The position in the query result to start returning employee pays.
+          Defaults to 0.
+
+        Returns:
+        - List[EmployeePay]: A list of employee pays matching the query parameters.
+        """
         request = self.request(
             Route(
                 "GET",
@@ -428,6 +629,21 @@ class BullhornClient:
         count: int = 10,
         start: int = 0,
     ) -> List[employer_contribution.EmployerContribution]:
+        """
+        Sends a GET request to the REST API to retrieve a list of employer contributions based on specified parameters.
+
+        Parameters:
+        - where (str): A string specifying the filter conditions for querying the employer contributions.
+        - fields (str): A string specifying which fields to include in the returned records.
+        - order_by (str, optional): A string specifying the order in which to return the employer contributions.
+          Defaults to an empty string, which means the order is unspecified.
+        - count (int, optional): The maximum number of employer contributions to return. Defaults to 10.
+        - start (int, optional): The position in the query result to start returning employer contributions.
+          Defaults to 0.
+
+        Returns:
+        - List[EmployerContribution]: A list of employer contributions matching the query parameters.
+        """
         request = self.request(
             Route(
                 "GET",
@@ -452,6 +668,21 @@ class BullhornClient:
         count: int = 10,
         start: int = 0,
     ) -> List[job_order.JobOrder]:
+        """
+        Sends a GET request to the REST API to retrieve a list of job orders based on specified parameters.
+
+        Parameters:
+        - where (str): A string specifying the filter conditions for querying the job orders.
+        - fields (str): A string specifying which fields to include in the returned records.
+        - order_by (str, optional): A string specifying the order in which to return the job orders.
+          Defaults to an empty string, which means the order is unspecified.
+        - count (int, optional): The maximum number of job orders to return. Defaults to 10.
+        - start (int, optional): The position in the query result to start returning job orders.
+          Defaults to 0.
+
+        Returns:
+        - List[JobOrder]: A list of job orders matching the query parameters.
+        """
         request = self.request(
             Route(
                 "GET",
@@ -476,6 +707,21 @@ class BullhornClient:
         count: int = 10,
         start: int = 0,
     ) -> List[job_submission.JobSubmission]:
+        """
+        Sends a GET request to the REST API to retrieve a list of job submissions based on specified parameters.
+
+        Parameters:
+        - where (str): A string specifying the filter conditions for querying the job submissions.
+        - fields (str): A string specifying which fields to include in the returned records.
+        - order_by (str, optional): A string specifying the order in which to return the job submissions.
+          Defaults to an empty string, which means the order is unspecified.
+        - count (int, optional): The maximum number of job submissions to return. Defaults to 10.
+        - start (int, optional): The position in the query result to start returning job submissions.
+          Defaults to 0.
+
+        Returns:
+        - List[JobSubmission]: A list of job submissions matching the query parameters.
+        """
         request = self.request(
             Route(
                 "GET",
@@ -500,6 +746,21 @@ class BullhornClient:
         count: int = 10,
         start: int = 0,
     ) -> List[job_submission_history.JobSubmissionHistory]:
+        """
+        Sends a GET request to the REST API to retrieve a list of job submission histories based on specified parameters.
+
+        Parameters:
+        - where (str): A string specifying the filter conditions for querying the job submission histories.
+        - fields (str): A string specifying which fields to include in the returned records.
+        - order_by (str, optional): A string specifying the order in which to return the job submission histories.
+          Defaults to an empty string, which means the order is unspecified.
+        - count (int, optional): The maximum number of job submission histories to return. Defaults to 10.
+        - start (int, optional): The position in the query result to start returning job submission histories.
+          Defaults to 0.
+
+        Returns:
+        - List[JobSubmissionHistory]: A list of job submission histories matching the query parameters.
+        """
         request = self.request(
             Route(
                 "GET",
@@ -524,6 +785,21 @@ class BullhornClient:
         count: int = 10,
         start: int = 0,
     ) -> List[lead.Lead]:
+        """
+        Sends a GET request to the REST API to retrieve a list of leads based on specified parameters.
+
+        Parameters:
+        - where (str): A string specifying the filter conditions for querying the leads.
+        - fields (str): A string specifying which fields to include in the returned records.
+        - order_by (str, optional): A string specifying the order in which to return the leads.
+          Defaults to an empty string, which means the order is unspecified.
+        - count (int, optional): The maximum number of leads to return. Defaults to 10.
+        - start (int, optional): The position in the query result to start returning leads.
+          Defaults to 0.
+
+        Returns:
+        - List[Leads]: A list of leads matching the query parameters.
+        """
         request = self.request(
             Route(
                 "GET",
@@ -548,6 +824,21 @@ class BullhornClient:
         count: int = 10,
         start: int = 0,
     ) -> List[lead_history.LeadHistory]:
+        """
+        Sends a GET request to the REST API to retrieve a list of lead histories based on specified parameters.
+
+        Parameters:
+        - where (str): A string specifying the filter conditions for querying the lead histories.
+        - fields (str): A string specifying which fields to include in the returned records.
+        - order_by (str, optional): A string specifying the order in which to return the lead histories.
+          Defaults to an empty string, which means the order is unspecified.
+        - count (int, optional): The maximum number of lead histories to return. Defaults to 10.
+        - start (int, optional): The position in the query result to start returning lead histories.
+          Defaults to 0.
+
+        Returns:
+        - List[LeadHistory]: A list of lead histories matching the query parameters.
+        """
         request = self.request(
             Route(
                 "GET",
@@ -572,6 +863,21 @@ class BullhornClient:
         count: int = 10,
         start: int = 0,
     ) -> List[location.Location]:
+        """
+        Sends a GET request to the REST API to retrieve a list of locations based on specified parameters.
+
+        Parameters:
+        - where (str): A string specifying the filter conditions for querying the locations.
+        - fields (str): A string specifying which fields to include in the returned records.
+        - order_by (str, optional): A string specifying the order in which to return the locations.
+          Defaults to an empty string, which means the order is unspecified.
+        - count (int, optional): The maximum number of locations to return. Defaults to 10.
+        - start (int, optional): The position in the query result to start returning locations.
+          Defaults to 0.
+
+        Returns:
+        - List[Location]: A list of locations matching the query parameters.
+        """
         request = self.request(
             Route(
                 "GET",
@@ -596,6 +902,21 @@ class BullhornClient:
         count: int = 10,
         start: int = 0,
     ) -> List[opportunity.Opportunity]:
+        """
+        Sends a GET request to the REST API to retrieve a list of opportunities based on specified parameters.
+
+        Parameters:
+        - where (str): A string specifying the filter conditions for querying the opportunities.
+        - fields (str): A string specifying which fields to include in the returned records.
+        - order_by (str, optional): A string specifying the order in which to return the opportunities.
+          Defaults to an empty string, which means the order is unspecified.
+        - count (int, optional): The maximum number of opportunities to return. Defaults to 10.
+        - start (int, optional): The position in the query result to start returning opportunities.
+          Defaults to 0.
+
+        Returns:
+        - List[Opportunity]: A list of opportunities matching the query parameters.
+        """
         request = self.request(
             Route(
                 "GET",
@@ -620,6 +941,21 @@ class BullhornClient:
         count: int = 10,
         start: int = 0,
     ) -> List[opportunity_history.OpportunityHistory]:
+        """
+        Sends a GET request to the REST API to retrieve a list of opportunity histories based on specified parameters.
+
+        Parameters:
+        - where (str): A string specifying the filter conditions for querying the opportunity histories.
+        - fields (str): A string specifying which fields to include in the returned records.
+        - order_by (str, optional): A string specifying the order in which to return the opportunity histories.
+          Defaults to an empty string, which means the order is unspecified.
+        - count (int, optional): The maximum number of opportunity histories to return. Defaults to 10.
+        - start (int, optional): The position in the query result to start returning opportunity histories.
+          Defaults to 0.
+
+        Returns:
+        - List[OpportunityHistory]: A list of opportunity histories matching the query parameters.
+        """
         request = self.request(
             Route(
                 "GET",
@@ -644,6 +980,21 @@ class BullhornClient:
         count: int = 10,
         start: int = 0,
     ) -> List[placement.Placement]:
+        """
+        Sends a GET request to the REST API to retrieve a list of placements based on specified parameters.
+
+        Parameters:
+        - where (str): A string specifying the filter conditions for querying the placements.
+        - fields (str): A string specifying which fields to include in the returned records.
+        - order_by (str, optional): A string specifying the order in which to return the placements.
+          Defaults to an empty string, which means the order is unspecified.
+        - count (int, optional): The maximum number of placements to return. Defaults to 10.
+        - start (int, optional): The position in the query result to start returning placements.
+          Defaults to 0.
+
+        Returns:
+        - List[Placement]: A list of placements matching the query parameters.
+        """
         request = self.request(
             Route(
                 "GET",
@@ -668,6 +1019,21 @@ class BullhornClient:
         count: int = 10,
         start: int = 0,
     ) -> List[placement_commission.PlacementCommission]:
+        """
+        Sends a GET request to the REST API to retrieve a list of placement commissions based on specified parameters.
+
+        Parameters:
+        - where (str): A string specifying the filter conditions for querying the placement commissions.
+        - fields (str): A string specifying which fields to include in the returned records.
+        - order_by (str, optional): A string specifying the order in which to return the placement commissions.
+          Defaults to an empty string, which means the order is unspecified.
+        - count (int, optional): The maximum number of placement commissions to return. Defaults to 10.
+        - start (int, optional): The position in the query result to start returning placement commissions.
+          Defaults to 0.
+
+        Returns:
+        - List[PlacementCommission]: A list of placement commissions matching the query parameters.
+        """
         request = self.request(
             Route(
                 "GET",
@@ -692,6 +1058,21 @@ class BullhornClient:
         count: int = 10,
         start: int = 0,
     ) -> List[sendout.Sendout]:
+        """
+        Sends a GET request to the REST API to retrieve a list of sendouts based on specified parameters.
+
+        Parameters:
+        - where (str): A string specifying the filter conditions for querying the sendouts.
+        - fields (str): A string specifying which fields to include in the returned records.
+        - order_by (str, optional): A string specifying the order in which to return the sendouts.
+          Defaults to an empty string, which means the order is unspecified.
+        - count (int, optional): The maximum number of sendouts to return. Defaults to 10.
+        - start (int, optional): The position in the query result to start returning sendouts.
+          Defaults to 0.
+
+        Returns:
+        - List[Sendout]: A list of sendouts matching the query parameters.
+        """
         request = self.request(
             Route(
                 "GET",
