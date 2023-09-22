@@ -149,7 +149,7 @@ def test_client_get_candidates(mocker):
     )
     # Get result
     result = bc.get_candidates(
-        query="dateLastModified:{2023/09/01 TO *}",
+        query="dateAdded:{20230901 TO *}",
         fields="id,businessSectors,candidateSource,category,companyName,dateAdded,dateLastModified,email,firstName,interviews,isDeleted,lastName,leads,mobile,name,occupation,owner,payrollStatus,salary,source,status,submissions,userDateAdded",
     )
     assert (len(result) == 0) or ("firstName" in result[0])
