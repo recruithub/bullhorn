@@ -148,14 +148,21 @@ class BullhornClient:
         self,
         where: str,
         fields: str,
+        order_by: str = "",
+        count: int = 100,
+        start: int = 0,
     ) -> List[appointment.Appointment]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "query/Appointment?where={where}&fields={fields}",
+                self.rest_url
+                + "query/Appointment?where={where}&fields={fields}&orderBy={order_by}&count={count}&start={start}",
                 path_params={
                     "where": where,
                     "fields": fields,
+                    "order_by": order_by,
+                    "count": count,
+                    "start": start,
                 },
             )
         )
@@ -165,14 +172,21 @@ class BullhornClient:
         self,
         where: str,
         fields: str,
+        order_by: str = "",
+        count: int = 100,
+        start: int = 0,
     ) -> List[business_sector.BusinessSector]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "query/BusinessSector?where={where}&fields={fields}",
+                self.rest_url
+                + "query/BusinessSector?where={where}&fields={fields}&orderBy={order_by}&count={count}&start={start}",
                 path_params={
                     "where": where,
                     "fields": fields,
+                    "order_by": order_by,
+                    "count": count,
+                    "start": start,
                 },
             )
         )
@@ -182,7 +196,9 @@ class BullhornClient:
         self,
         query: str,
         fields: str,
-        count: int = 10,
+        order_by: str = "",
+        count: int = 100,
+        start: int = 0,
     ) -> List[candidate.Candidate]:
         # Initialise pagination cursor
         start = 0
@@ -217,14 +233,21 @@ class BullhornClient:
         self,
         where: str,
         fields: str,
+        order_by: str = "",
+        count: int = 100,
+        start: int = 0,
     ) -> List[category.Category]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "query/Category?where={where}&fields={fields}",
+                self.rest_url
+                + "query/Category?where={where}&fields={fields}&orderBy={order_by}&count={count}&start={start}",
                 path_params={
                     "where": where,
                     "fields": fields,
+                    "order_by": order_by,
+                    "count": count,
+                    "start": start,
                 },
             )
         )
@@ -234,14 +257,21 @@ class BullhornClient:
         self,
         where: str,
         fields: str,
+        order_by: str = "",
+        count: int = 100,
+        start: int = 0,
     ) -> List[client_contact.ClientContact]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "query/ClientContact?where={where}&fields={fields}",
+                self.rest_url
+                + "query/ClientContact?where={where}&fields={fields}&orderBy={order_by}&count={count}&start={start}",
                 path_params={
                     "where": where,
                     "fields": fields,
+                    "order_by": order_by,
+                    "count": count,
+                    "start": start,
                 },
             )
         )
@@ -251,14 +281,21 @@ class BullhornClient:
         self,
         where: str,
         fields: str,
+        order_by: str = "",
+        count: int = 100,
+        start: int = 0,
     ) -> List[client_corporation.ClientCorporation]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "query/ClientCorporation?where={where}&fields={fields}",
+                self.rest_url
+                + "query/ClientCorporation?where={where}&fields={fields}&orderBy={order_by}&count={count}&start={start}",
                 path_params={
                     "where": where,
                     "fields": fields,
+                    "order_by": order_by,
+                    "count": count,
+                    "start": start,
                 },
             )
         )
@@ -268,15 +305,21 @@ class BullhornClient:
         self,
         where: str,
         fields: str,
+        order_by: str = "",
+        count: int = 100,
+        start: int = 0,
     ) -> List[client_corporation_appointment.ClientCorporationAppointment]:
         request = self.request(
             Route(
                 "GET",
                 self.rest_url
-                + "query/ClientCorporationAppointment?where={where}&fields={fields}",
+                + "query/ClientCorporationAppointment?where={where}&fields={fields}&orderBy={order_by}&count={count}&start={start}",
                 path_params={
                     "where": where,
                     "fields": fields,
+                    "order_by": order_by,
+                    "count": count,
+                    "start": start,
                 },
             )
         )
@@ -286,14 +329,21 @@ class BullhornClient:
         self,
         where: str,
         fields: str,
+        order_by: str = "",
+        count: int = 100,
+        start: int = 0,
     ) -> List[corporate_user.CorporateUser]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "query/CorporateUser?where={where}&fields={fields}",
+                self.rest_url
+                + "query/CorporateUser?where={where}&fields={fields}&orderBy={order_by}&count={count}&start={start}",
                 path_params={
                     "where": where,
                     "fields": fields,
+                    "order_by": order_by,
+                    "count": count,
+                    "start": start,
                 },
             )
         )
@@ -303,14 +353,21 @@ class BullhornClient:
         self,
         where: str,
         fields: str,
+        order_by: str = "",
+        count: int = 100,
+        start: int = 0,
     ) -> List[country.Country]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "query/Country?where={where}&fields={fields}",
+                self.rest_url
+                + "query/Country?where={where}&fields={fields}&orderBy={order_by}&count={count}&start={start}",
                 path_params={
                     "where": where,
                     "fields": fields,
+                    "order_by": order_by,
+                    "count": count,
+                    "start": start,
                 },
             )
         )
@@ -320,14 +377,21 @@ class BullhornClient:
         self,
         where: str,
         fields: str,
+        order_by: str = "",
+        count: int = 100,
+        start: int = 0,
     ) -> List[department.Department]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "query/Department?where={where}&fields={fields}",
+                self.rest_url
+                + "query/Department?where={where}&fields={fields}&orderBy={order_by}&count={count}&start={start}",
                 path_params={
                     "where": where,
                     "fields": fields,
+                    "order_by": order_by,
+                    "count": count,
+                    "start": start,
                 },
             )
         )
@@ -337,14 +401,21 @@ class BullhornClient:
         self,
         where: str,
         fields: str,
+        order_by: str = "",
+        count: int = 100,
+        start: int = 0,
     ) -> List[employee_pay.EmployeePay]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "query/EmployeePay?where={where}&fields={fields}",
+                self.rest_url
+                + "query/EmployeePay?where={where}&fields={fields}&orderBy={order_by}&count={count}&start={start}",
                 path_params={
                     "where": where,
                     "fields": fields,
+                    "order_by": order_by,
+                    "count": count,
+                    "start": start,
                 },
             )
         )
@@ -354,15 +425,21 @@ class BullhornClient:
         self,
         where: str,
         fields: str,
+        order_by: str = "",
+        count: int = 100,
+        start: int = 0,
     ) -> List[employer_contribution.EmployerContribution]:
         request = self.request(
             Route(
                 "GET",
                 self.rest_url
-                + "query/EmployerContribution?where={where}&fields={fields}",
+                + "query/EmployerContribution?where={where}&fields={fields}&orderBy={order_by}&count={count}&start={start}",
                 path_params={
                     "where": where,
                     "fields": fields,
+                    "order_by": order_by,
+                    "count": count,
+                    "start": start,
                 },
             )
         )
@@ -372,14 +449,21 @@ class BullhornClient:
         self,
         where: str,
         fields: str,
+        order_by: str = "",
+        count: int = 100,
+        start: int = 0,
     ) -> List[job_order.JobOrder]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "query/JobOrder?where={where}&fields={fields}",
+                self.rest_url
+                + "query/JobOrder?where={where}&fields={fields}&orderBy={order_by}&count={count}&start={start}",
                 path_params={
                     "where": where,
                     "fields": fields,
+                    "order_by": order_by,
+                    "count": count,
+                    "start": start,
                 },
             )
         )
@@ -389,14 +473,21 @@ class BullhornClient:
         self,
         where: str,
         fields: str,
+        order_by: str = "",
+        count: int = 100,
+        start: int = 0,
     ) -> List[job_submission.JobSubmission]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "query/JobSubmission?where={where}&fields={fields}",
+                self.rest_url
+                + "query/JobSubmission?where={where}&fields={fields}&orderBy={order_by}&count={count}&start={start}",
                 path_params={
                     "where": where,
                     "fields": fields,
+                    "order_by": order_by,
+                    "count": count,
+                    "start": start,
                 },
             )
         )
@@ -406,15 +497,21 @@ class BullhornClient:
         self,
         where: str,
         fields: str,
+        order_by: str = "",
+        count: int = 100,
+        start: int = 0,
     ) -> List[job_submission_history.JobSubmissionHistory]:
         request = self.request(
             Route(
                 "GET",
                 self.rest_url
-                + "query/JobSubmissionHistory?where={where}&fields={fields}",
+                + "query/JobSubmissionHistory?where={where}&fields={fields}&orderBy={order_by}&count={count}&start={start}",
                 path_params={
                     "where": where,
                     "fields": fields,
+                    "order_by": order_by,
+                    "count": count,
+                    "start": start,
                 },
             )
         )
@@ -424,14 +521,21 @@ class BullhornClient:
         self,
         where: str,
         fields: str,
+        order_by: str = "",
+        count: int = 100,
+        start: int = 0,
     ) -> List[lead.Lead]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "query/Lead?where={where}&fields={fields}",
+                self.rest_url
+                + "query/Lead?where={where}&fields={fields}&orderBy={order_by}&count={count}&start={start}",
                 path_params={
                     "where": where,
                     "fields": fields,
+                    "order_by": order_by,
+                    "count": count,
+                    "start": start,
                 },
             )
         )
@@ -441,14 +545,21 @@ class BullhornClient:
         self,
         where: str,
         fields: str,
+        order_by: str = "",
+        count: int = 100,
+        start: int = 0,
     ) -> List[lead_history.LeadHistory]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "query/LeadHistory?where={where}&fields={fields}",
+                self.rest_url
+                + "query/LeadHistory?where={where}&fields={fields}&orderBy={order_by}&count={count}&start={start}",
                 path_params={
                     "where": where,
                     "fields": fields,
+                    "order_by": order_by,
+                    "count": count,
+                    "start": start,
                 },
             )
         )
@@ -458,14 +569,21 @@ class BullhornClient:
         self,
         where: str,
         fields: str,
+        order_by: str = "",
+        count: int = 100,
+        start: int = 0,
     ) -> List[location.Location]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "query/Location?where={where}&fields={fields}",
+                self.rest_url
+                + "query/Location?where={where}&fields={fields}&orderBy={order_by}&count={count}&start={start}",
                 path_params={
                     "where": where,
                     "fields": fields,
+                    "order_by": order_by,
+                    "count": count,
+                    "start": start,
                 },
             )
         )
@@ -475,14 +593,21 @@ class BullhornClient:
         self,
         where: str,
         fields: str,
+        order_by: str = "",
+        count: int = 100,
+        start: int = 0,
     ) -> List[opportunity.Opportunity]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "query/Opportunity?where={where}&fields={fields}",
+                self.rest_url
+                + "query/Opportunity?where={where}&fields={fields}&orderBy={order_by}&count={count}&start={start}",
                 path_params={
                     "where": where,
                     "fields": fields,
+                    "order_by": order_by,
+                    "count": count,
+                    "start": start,
                 },
             )
         )
@@ -492,15 +617,21 @@ class BullhornClient:
         self,
         where: str,
         fields: str,
+        order_by: str = "",
+        count: int = 100,
+        start: int = 0,
     ) -> List[opportunity_history.OpportunityHistory]:
         request = self.request(
             Route(
                 "GET",
                 self.rest_url
-                + "query/OpportunityHistory?where={where}&fields={fields}",
+                + "query/OpportunityHistory?where={where}&fields={fields}&orderBy={order_by}&count={count}&start={start}",
                 path_params={
                     "where": where,
                     "fields": fields,
+                    "order_by": order_by,
+                    "count": count,
+                    "start": start,
                 },
             )
         )
@@ -510,14 +641,21 @@ class BullhornClient:
         self,
         where: str,
         fields: str,
+        order_by: str = "",
+        count: int = 100,
+        start: int = 0,
     ) -> List[placement.Placement]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "query/Placement?where={where}&fields={fields}",
+                self.rest_url
+                + "query/Placement?where={where}&fields={fields}&orderBy={order_by}&count={count}&start={start}",
                 path_params={
                     "where": where,
                     "fields": fields,
+                    "order_by": order_by,
+                    "count": count,
+                    "start": start,
                 },
             )
         )
@@ -527,15 +665,21 @@ class BullhornClient:
         self,
         where: str,
         fields: str,
+        order_by: str = "",
+        count: int = 100,
+        start: int = 0,
     ) -> List[placement_commission.PlacementCommission]:
         request = self.request(
             Route(
                 "GET",
                 self.rest_url
-                + "query/PlacementCommission?where={where}&fields={fields}",
+                + "query/PlacementCommission?where={where}&fields={fields}&orderBy={order_by}&count={count}&start={start}",
                 path_params={
                     "where": where,
                     "fields": fields,
+                    "order_by": order_by,
+                    "count": count,
+                    "start": start,
                 },
             )
         )
@@ -545,14 +689,21 @@ class BullhornClient:
         self,
         where: str,
         fields: str,
+        order_by: str = "",
+        count: int = 100,
+        start: int = 0,
     ) -> List[sendout.Sendout]:
         request = self.request(
             Route(
                 "GET",
-                self.rest_url + "query/Sendout?where={where}&fields={fields}",
+                self.rest_url
+                + "query/Sendout?where={where}&fields={fields}&orderBy={order_by}&count={count}&start={start}",
                 path_params={
                     "where": where,
                     "fields": fields,
+                    "order_by": order_by,
+                    "count": count,
+                    "start": start,
                 },
             )
         )
