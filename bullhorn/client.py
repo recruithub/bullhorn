@@ -227,7 +227,6 @@ class BullhornClient:
             if start + count >= total:
                 last = True
             start += count
-            print(request["data"])
         # Return all data
         return data
 
