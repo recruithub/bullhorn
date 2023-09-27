@@ -617,7 +617,7 @@ def test_client_get_locations(mocker):
     # Get result
     result = bc.get_locations(
         where="dateLastModified >= 1693522800000",
-        fields="dateAdded,dateLastModified,owner,status,title",
+        fields="id,dateAdded,dateLastModified,owner,status,title",
     )
     assert (len(result) == 0) or ("id" in result[0])
 
