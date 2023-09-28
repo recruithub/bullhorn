@@ -1,3 +1,4 @@
+import logging
 import sys
 import time
 from typing import Any, Dict, List, Optional, Union
@@ -33,6 +34,8 @@ from bullhorn.types import (
     placement_commission,
     sendout,
 )
+
+logger = logging.getLogger(__name__)
 
 
 class BullhornClient:
