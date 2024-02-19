@@ -33,6 +33,7 @@ from bullhorn.types import (
     placement,
     placement_commission,
     sendout,
+    setting,
 )
 
 logger = logging.getLogger(__name__)
@@ -1073,4 +1074,30 @@ class BullhornClient:
                 },
             )
         )
+        return request["data"]
+
+    def get_settings(
+        self,
+        fields: str,
+    ) -> List[setting.Setting]:
+        """
+        Sends a GET request to the REST API to retrieve a list of settings based on specified parameters.
+
+        Parameters:
+        - fields (str): A string specifying which fields to include in the returned records.
+
+        Returns:
+        - List[Setting]: A list of settings matching the query parameters.
+        """
+        request = self.request(
+            Route(
+                "GET",
+                self.rest_url
+                + "settings/{fields}",
+                path_params={
+                    "fields": fields,
+                },
+            )
+        )
+        print(request)
         return request["data"]
